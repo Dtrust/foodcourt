@@ -1,0 +1,14 @@
+@import './src/sass/variables'
+@import './src/sass/mixins'
+@import './src/sass/functions'
+
+.social
+	@include flexCenter
+	column-gap: toRem(30)
+	&-link
+		transition: all .3s ease-in-out
+		&:hover
+			& .social-icon
+				fill: #f3f3f3
+	&-icon
+		fill: #f5b44f

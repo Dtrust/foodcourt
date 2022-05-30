@@ -1,0 +1,51 @@
+@mixin defineColorHSL($color, $hue, $saturation, $lightness) {
+    #{$color}: unquote('hsl(#{$hue}, #{$saturation}, #{$lightness})');
+    #{$color}-h: #{$hue};
+    #{$color}-s: #{$saturation};
+    #{$color}-l: #{$lightness};
+}
+
+// Scroll Bar
+@mixin scrollBar {
+    &::-webkit-scrollbar {
+        width: 6px;
+        transition: all 0.5s ease;
+    }
+    &::-webkit-scrollbar-track {
+        -webkit-box-shadow: 5px 5px 5px -5px hsla(0, 1, 27, 1) inset;
+        background-color: #f3f3f3;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background-color: hsla(
+            var(--color-primary-h),
+            var(--color-primary-s),
+            var(--color-primary-l),
+            1
+        );
+    }
+}
+
+// Temporary Vision
+@mixin temp-red {
+    background: rgba(255, 0, 0, 0.12);
+    border: 1px dashed red;
+}
+
+@mixin temp-green {
+    background: rgba(0, 128, 0, 0.31);
+    border: 1px dashed green;
+}
+
+@mixin temp-blue {
+    background: rgba(0, 0, 255, 0.26);
+    border: 1px dashed blue;
+}
+
+// Flex
+
+@mixin flexCenter {
+    display: flex;
+    align-items: center;
+    @content;
+}

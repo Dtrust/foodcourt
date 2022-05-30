@@ -1,0 +1,64 @@
+@import './src/sass/variables'
+@import './src/sass/mixins'
+@import './src/sass/functions'
+
+.sort
+	position: relative
+	max-width: toRem(180)
+	&-label
+		@include flexCenter
+		column-gap: toRem(10)
+		&__icon
+			& path
+				fill: #f5b44f
+		&__btn
+			position: relative
+			font-size: toRem(16)
+			font-weight: 700
+			color: #f5b44f
+			transition: all .3s ease-in-out
+			&::after
+				content: ''
+				position: absolute
+				display: block
+				width: 100%
+				height: 1px
+				background: #f5b44f
+			&:hover
+				color: #f3f3f3
+				&::after
+					content: none
+	&-popup
+		position: absolute
+		top: toRem(30)
+		right: 0
+		border-radius: toRem(15)
+		background: #111111
+		box-shadow: 0 14px 37px rgba(195, 195, 195, .41)
+		overflow: hidden
+		z-index: 1
+		&__item
+			padding: toEm(15) toEm(30)
+			font-size: toRem(16)
+			font-weight: 700
+			cursor: pointer
+			transition: all .3s ease-in-out
+			&:hover
+				background: #f5b44f
+				color: #111111
+				&.active
+					& span
+						&::after
+							background: #111111
+			&.active
+				position: relative
+				& span
+					position: relative
+					&::after
+						content: ''
+						position: absolute
+						bottom: toRem(-5)
+						display: block
+						width: 100%
+						height: 1px
+						background: #f3f3f3

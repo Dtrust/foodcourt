@@ -1,0 +1,32 @@
+@import './src/sass/variables'
+@import './src/sass/mixins'
+@import './src/sass/functions'
+
+.top
+	height: 90vh
+	padding-top: 10%
+	background: url('../../assets/images/bg.jpg') no-repeat center center
+	background-size: cover
+	&-offer
+		@include flexCenter
+		justify-content: space-around
+		&__title
+			font-size: toRem(60)
+			font-weight: 700
+			line-height: 1.4
+			& span
+				color: #f5b44f
+		&__btn
+			margin-top: toEm(30)
+		&__img
+			max-width: toRem(570)
+		&__features
+			@include flexCenter
+			column-gap: toEm(60)
+			margin-top: toEm(60)
+			& .features
+				&-item
+					&__text
+						font-size: toRem(20)
+						text-align: center
+						color: #66a117

@@ -1,0 +1,16 @@
+@import './src/sass/variables'
+@import './src/sass/mixins'
+@import './src/sass/functions'
+
+.categories
+	&-list
+		@include flexCenter
+		justify-content: center
+		column-gap: toEm(30)
+	&-item
+		&__btn
+			transition: all .3s ease-in-out
+			&.active
+				color: #111111
+				background: #f5b44f
+				outline: 1px double #111111

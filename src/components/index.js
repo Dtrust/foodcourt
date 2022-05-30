@@ -1,0 +1,9 @@
+export { default as Header } from './Header';
+export { default as Categories } from './Categories';
+export { default as Sort } from './Sort';
+export { default as Product } from './Product';
+export { default as Top } from './Top';
+export { default as Menu } from './Menu';
+export { default as About } from './About';
+export { default as Location } from './Location';
+export { default as Footer } from './Footer';

@@ -1,0 +1,103 @@
+@import './src/sass/variables'
+@import './src/sass/mixins'
+@import './src/sass/functions'
+
+.product
+	max-width: toRem(300)
+	padding: toEm(30)
+	background: #454444
+	border-radius: toRem(40)
+	&-img
+		position: relative
+		min-height: toEm(152)
+		& img
+			position: absolute
+			top: toEm(-120)
+			left: 0
+			right: 0
+			margin: auto
+			max-width: toRem(260)
+	&-title
+		font-size: toRem(20)
+		font-weight: 600
+		text-align: center
+		&::after
+			content: ''
+			display: block
+			width: 100%
+			height: 1px
+			margin: toRem(10) 0
+			background: #f5b44f
+	&-desc
+		min-height: toRem(90)
+		margin: toRem(20) 0
+		font-size: toRem(14)
+		text-align: center
+		line-height: 1.4
+	&-selector
+		margin: toRem(20) 0
+		padding: toRem(6)
+		border-radius: toRem(10)
+		background: #f5b44f
+		&__item
+			@include flexCenter
+			flex: 1
+			column-gap: toRem(10)
+			&:not(:last-of-type)
+				margin-bottom: toRem(5)
+		&__btn
+			flex: 1
+			padding: toRem(8)
+			font-weight: 600
+			line-height: 1.2
+			color: #111111
+			border-radius: toRem(10)
+			transition: all .3s ease-in-out
+			&:hover
+				color: #f3f3f3
+				outline: 1px solid #111111
+			&.active
+				color: #f3f3f3
+				background: #111111
+	&-bottom
+		margin: toRem(20) 0
+		&__wrap
+			position: relative
+			min-height: toRem(10)
+			& .product
+				&-btn
+					@include flexCenter
+					justify-content: center
+					position: absolute
+					top: toRem(25)
+					left: 0
+					right: 0
+					transition: all .3s ease-in-out
+					&:hover
+						background: transparent
+						outline: 1px solid #ef1b03
+					&__icon
+						margin-right: toRem(5)
+					&__count
+						display: inline-flex
+						align-items: center
+						justify-content: center
+						position: absolute
+						right: toRem(19)
+						top: 50%
+						transform: translate(0, -50%)
+						//margin-left: toRem(10)
+						width: 20px
+						height: 20px
+						padding: 3px
+						font-size: toRem(16)
+						font-weight: 700
+						color: #000
+						border-radius: 50%
+						background: #f5b44f
+						outline: 1px solid #000
+						transition: all .3s ease-in-out
+	&-price
+		font-size: toRem(24)
+		font-weight: 700
+		text-align: center

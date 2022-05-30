@@ -1,0 +1,37 @@
+@import './src/sass/variables'
+@import './src/sass/mixins'
+@import './src/sass/functions'
+
+.header
+	position: fixed
+	width: 100%
+	top: 0
+	left: 0
+	padding: toRem(30) 0
+	transition: all .3s ease-in-out
+	z-index: 2
+	&--scroll
+		padding: toRem(15) 0
+		background: #111111
+		box-shadow: 0 14px 37px rgba(201, 201, 201, .55)
+	&-content
+		@include flexCenter
+		justify-content: space-around
+	&-nav
+		&__list
+			@include flexCenter
+			column-gap: 30px
+		&__item
+			padding: 15px
+	&-phone
+		@include flexCenter
+		flex-direction: column
+		&__callback
+			margin-top: toEm(5)
+
+
+@media screen and (max-width: 768px)
+	.header
+		&-nav
+			&__list
+				display: none
