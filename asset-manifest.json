@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/foodcourt/static/css/main.56985f7e.css",
-    "main.js": "/foodcourt/static/js/main.ef904f63.js",
+    "main.css": "/foodcourt/static/css/main.964d8563.css",
+    "main.js": "/foodcourt/static/js/main.47040b9e.js",
     "static/media/bg.jpg": "/foodcourt/static/media/bg.32ab415bd50de3d972bd.jpg",
     "static/media/top.png": "/foodcourt/static/media/top.e62443c87adbf9f36cd8.png",
     "static/media/Montserrat-Bold.woff": "/foodcourt/static/media/Montserrat-Bold.3155f256200b7d559607.woff",
@@ -12,14 +12,15 @@
     "static/media/Montserrat-Regular.woff2": "/foodcourt/static/media/Montserrat-Regular.4ada7f2f580c676690f0.woff2",
     "static/media/Marcellus-Regular.woff": "/foodcourt/static/media/Marcellus-Regular.62064e40266e38ef50e2.woff",
     "static/media/Marcellus-Regular.woff2": "/foodcourt/static/media/Marcellus-Regular.8ae4aad691a9cb5c462f.woff2",
+    "static/media/error404.png": "/foodcourt/static/media/error404.11d35989c17fb261b888.png",
     "static/media/logo.svg": "/foodcourt/static/media/logo.ca73addd4289c6e9bfecf4db38dcbc50.svg",
     "static/media/icons.svg": "/foodcourt/static/media/icons.0b041bf9612c272464db8b80d67c1c4d.svg",
     "index.html": "/foodcourt/index.html",
-    "main.56985f7e.css.map": "/foodcourt/static/css/main.56985f7e.css.map",
-    "main.ef904f63.js.map": "/foodcourt/static/js/main.ef904f63.js.map"
+    "main.964d8563.css.map": "/foodcourt/static/css/main.964d8563.css.map",
+    "main.47040b9e.js.map": "/foodcourt/static/js/main.47040b9e.js.map"
   },
   "entrypoints": [
-    "static/css/main.56985f7e.css",
-    "static/js/main.ef904f63.js"
+    "static/css/main.964d8563.css",
+    "static/js/main.47040b9e.js"
   ]
 }
