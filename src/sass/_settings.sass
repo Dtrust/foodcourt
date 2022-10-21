@@ -1,4 +1,5 @@
 @import './src/sass/variables'
+@import './src/sass/mixins'
 
 :root,
 [data-theme	='default']
@@ -51,6 +52,32 @@ img
 
 input
 	box-sizing: border-box
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder
+	@include placeholdersFont
+input::-moz-placeholder,
+textarea::-moz-placeholder
+	@include placeholdersFont
+input:-moz-placeholder,
+textarea:-moz-placeholder
+	@include placeholdersFont
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder
+	@include placeholdersFont
+
+input:focus::-webkit-input-placeholder,
+textarea:focus::-webkit-input-placeholder
+	@include placeholdersFontTransparent
+input:focus::-moz-placeholder,
+textarea:focus::-moz-placeholder
+	@include placeholdersFontTransparent
+input:focus:-moz-placeholder,
+textarea:focus:-moz-placeholder
+	@include placeholdersFontTransparent
+input:focus:-ms-input-placeholder,
+textarea:focus:-ms-input-placeholder
+	@include placeholdersFontTransparent
 
 .content
 	min-height: calc(100vh - 653px)

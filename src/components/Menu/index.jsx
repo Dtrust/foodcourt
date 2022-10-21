@@ -1,7 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
-import { setCategoryID } from '../../store/slices/filterSlice';
+import {
+    setCategoryID,
+    updateProductsLimit,
+    setProductsLimit,
+} from '../../store/slices/filterSlice';
 
 import { Categories, Product, Sort, Skeleton } from '../index';
 
@@ -13,14 +18,16 @@ const { REACT_APP_DB } = process.env;
 const Menu = () => {
     const dispatch = useDispatch();
 
-    const { categoryID, sort } = useSelector(state => state.filterSlice);
+    const { categoryID, sort, productsLimit } = useSelector(
+        state => state.filterSlice
+    );
+
     const sortProperty = sort.sortProperty;
 
     const { searchValue } = useContext(SearchContext);
 
     const [products, setProducts] = useState([]);
     const [productsLength, setProductsLength] = useState(0);
-    const [limit, setLimit] = useState(9);
     const [isLoading, setIsLoading] = useState(true);
 
     const onChangeCategory = id => {
@@ -33,6 +40,17 @@ const Menu = () => {
     const search = searchValue ? `search=${searchValue}` : '';
 
     const goods = products.map(obj => <Product key={obj.id} {...obj} />);
+
+    const loadProducts = () => {
+        axios
+            .get(
+                `${REACT_APP_DB}?p=1&l=${productsLimit}&${category}&sortBy=${sortBy}&order=${order}&${search}`
+            )
+            .then(res => {
+                setProducts(res.data);
+                setIsLoading(false);
+            });
+    };
 
     useEffect(() => {
         setIsLoading(true);
@@ -48,29 +66,14 @@ const Menu = () => {
             };
             loadProductsLength();
         }
-
-        const loadProducts = () => {
-            fetch(
-                `${REACT_APP_DB}?p=1&l=${limit}&${category}&sortBy=${sortBy}&order=${order}&${search}`
-            )
-                .then(res => res.json())
-                .then(items => {
-                    setProducts(items);
-                    setIsLoading(false);
-                });
-        };
         loadProducts();
-    }, [categoryID, sortProperty, limit, searchValue]);
+    }, [categoryID, sortProperty, productsLimit, searchValue]);
 
     const loadMore = () => {
-        if (productsLength > limit) {
-            setLimit(limit => limit + 9);
-            console.log('more');
-        } else {
-            console.log('end');
-            return;
+        if (productsLength > productsLimit) {
+            dispatch(updateProductsLimit());
+            dispatch(setProductsLimit);
         }
-        console.log(productsLength);
     };
 
     return (
@@ -91,13 +94,13 @@ const Menu = () => {
                 </div>
                 <div className="menu-products">
                     {isLoading
-                        ? [...new Array(limit)].map((_, index) => (
+                        ? [...new Array(productsLimit)].map((_, index) => (
                               <Skeleton key={index} />
                           ))
                         : goods}
                 </div>
                 <div className="menu-showmore">
-                    {productsLength > limit ? (
+                    {productsLength > productsLimit ? (
                         <button
                             onClick={loadMore}
                             className="btn btn-transparent menu-showmore__btn"

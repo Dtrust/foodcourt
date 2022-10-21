@@ -26,6 +26,19 @@
     }
 }
 
+// Placeholder BEGIN
+
+@mixin placeholdersFont {
+    font-family: 'Montserrat', sans-serif;
+    @content;
+}
+@mixin placeholdersFontTransparent {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    @content;
+}
+// Placeholder END
+
 //Adaptive Font
 $maxWidth: 1480;
 

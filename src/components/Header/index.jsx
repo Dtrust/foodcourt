@@ -54,7 +54,6 @@ const Header = ({ searchValue, setSearchValue }) => {
     const handleMobileSearch = () => {
         mobileSearchFocus.current.focus();
         setIsMobileSearchActive(!isMobileSearchActive);
-        console.log(mobileSearchFocus);
     };
 
     const location = useLocation();

@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
+import debounce from 'lodash.debounce';
 
 import classNames from 'classnames';
 
@@ -8,7 +9,21 @@ import icons from '../../assets/images/icons.svg';
 import { SearchContext } from '../../App';
 
 const Search = ({ isMobileSearchActive, cssClass, handleFocus }) => {
-    const { searchValue, setSearchValue } = useContext(SearchContext);
+    const [localValue, setLocalValue] = useState();
+    const { setSearchValue } = useContext(SearchContext);
+
+    const updateSearchValue = useCallback(
+        debounce(str => {
+            setSearchValue(str);
+            window.location.href = '/#menu';
+        }, 750),
+        []
+    );
+
+    const onChangeInput = e => {
+        setLocalValue(e.target.value);
+        updateSearchValue(e.target.value);
+    };
 
     return (
         <div
@@ -20,16 +35,14 @@ const Search = ({ isMobileSearchActive, cssClass, handleFocus }) => {
         >
             <input
                 ref={handleFocus}
-                value={searchValue}
-                onChange={e => setSearchValue(e.target.value)}
+                value={localValue}
+                onChange={onChangeInput}
                 className={classNames('search-field')}
-                placeholder="Search by name"
+                placeholder="Search pizzas"
             />
-            <button className="search-btn">
-                <svg className="search-icon" width="20" height="20">
-                    <use href={`${icons}#search`} />
-                </svg>
-            </button>
+            <svg className="search-icon" width="20" height="20">
+                <use href={`${icons}#search`} />
+            </svg>
         </div>
     );
 };
