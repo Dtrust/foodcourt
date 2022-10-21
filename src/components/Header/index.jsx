@@ -80,9 +80,7 @@ const Header = ({ searchValue, setSearchValue }) => {
                     <div className="logo header-logo">
                         <Link to="/">
                             <Logo />
-                            <span className="visually-hidden">
-                                Service Name
-                            </span>
+                            <span className="visually-hidden">Logo</span>
                         </Link>
                     </div>
 

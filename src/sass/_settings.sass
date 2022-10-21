@@ -23,7 +23,7 @@ input[type="radio"].visually-hidden
 	overflow: hidden
 
 body
-	font-family: Montserrat, sans-serif
+	font-family: 'Montserrat', sans-serif
 	background-size: cover
 	color: #f3f3f3
 	@include scrollBar
@@ -57,7 +57,6 @@ input
 	background: #111111
 
 .container
-	//width: 100%
 	max-width: toRem(1480)
 	margin: 0 auto
 	padding: 0 15px
@@ -274,20 +273,10 @@ input
 					text-transform: uppercase
 
 
-
 @media screen and (max-width: 768px)
 	.cart
 		display: block
 		padding-top: toRem(60)
-
-
-//@media screen and (max-width: 575px)
-//	.cart
-//		&-item
-//			&__img
-//				min-width: calc(100% - 70vw)
-//				& img
-//					max-width: toRem(60)
 
 
 @media screen and (max-width: 480px)
@@ -323,3 +312,16 @@ input
 					order: 1
 					padding: toRem(8) toRem(15)
 					opacity: .45
+
+
+//Error Page
+
+.notfound
+	@include flexCenter
+	justify-content: center
+	flex-direction: column
+	padding-top: toRem(80)
+	padding-bottom: toRem(80)
+	height: 50vh
+	&-img
+		max-width: toRem(370)
