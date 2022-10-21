@@ -1,0 +1,23 @@
+@import './src/sass/variables'
+@import './src/sass/mixins'
+@import './src/sass/functions'
+
+
+.search
+	position: relative
+	&-field
+		//width: 100%
+		height: toRem(35)
+		padding: 0 toRem(45) 0 toRem(10)
+		border: 1px solid #ef1b03
+		border-radius: toRem(5)
+	&-btn
+		position: absolute
+		top: 0px
+		right: 11px
+		width: toRem(35)
+		height: toRem(35)
+		background-color: #ef1b03
+		border-radius: 0 toRem(5) toRem(5) 0
+		& svg
+			fill: #f3f3f3

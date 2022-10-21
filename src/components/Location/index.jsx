@@ -35,7 +35,7 @@ const Location = () => {
     }, []);
 
     return (
-        <section className="location">
+        <section id="contacts" className="location">
             <div className="location-content">
                 {isLoaded ? (
                     <GoogleMap

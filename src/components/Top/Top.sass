@@ -3,15 +3,21 @@
 @import './src/sass/functions'
 
 .top
-	height: 90vh
-	padding-top: 10%
-	background: url('../../assets/images/bg.jpg') no-repeat center center
-	background-size: cover
+	//height: 100vh
+	//padding-top: toRem(190)
+	//background: url('../../assets/images/bg.jpg') no-repeat center center
+	//background-size: cover
 	&-offer
 		@include flexCenter
 		justify-content: space-around
+		&__wrap
+			width: 50%
+			&:nth-of-type(1)
+				position: relative
+				z-index: 1
 		&__title
-			font-size: toRem(60)
+			position: relative
+			@include adaptiveFont(66, 32)
 			font-weight: 700
 			line-height: 1.4
 			& span
@@ -28,5 +34,28 @@
 				&-item
 					&__text
 						font-size: toRem(20)
-						text-align: center
+						text-align: left
 						color: #66a117
+
+
+@media screen and (max-width: 575px)
+	.top
+		@include flexCenter
+		padding-top: 0
+		&-offer
+			&__wrap
+				width: 100%
+				&:nth-of-type(2)
+					position: absolute
+					top: toRem(95)
+					&::after
+						content: ''
+						position: absolute
+						top: 0
+						left: 0
+						display: block
+						width: 100%
+						height: 100%
+						background: rgba(0, 0, 0, .5)
+						border-radius: 50%
+

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 
 import './Categories.sass';
 
-const Categories = () => {
+const Categories = ({ categoryID, onChangeCategory }) => {
     const categories = [
         { id: 0, name: 'All' },
         { id: 1, name: 'Meat' },
@@ -13,17 +13,15 @@ const Categories = () => {
         { id: 5, name: 'Closed' },
     ];
 
-    const [activeIndex, setActiveIndex] = useState(0);
-
     return (
         <ul className="categories-list">
             {categories.map(({ id, name }, index) => (
                 <li key={id} className="categories-item">
                     <button
-                        onClick={() => setActiveIndex(index)}
+                        onClick={() => onChangeCategory(index)}
                         className={classNames(
                             'btn btn-transparent categories-item__btn',
-                            activeIndex === index ? 'active' : ''
+                            categoryID === index ? 'active' : ''
                         )}
                         title={name}
                     >

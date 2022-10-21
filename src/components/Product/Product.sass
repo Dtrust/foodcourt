@@ -3,10 +3,13 @@
 @import './src/sass/functions'
 
 .product
+	margin: auto
 	max-width: toRem(300)
-	padding: toEm(30)
+	width: 80%
+	padding: 12% 6%
 	background: #454444
 	border-radius: toRem(40)
+	box-shadow: 0 6px 18px rgba(56, 56, 56, .75)
 	&-img
 		position: relative
 		min-height: toEm(152)
@@ -29,6 +32,7 @@
 			margin: toRem(10) 0
 			background: #f5b44f
 	&-desc
+		//min-width: toRem(300)
 		min-height: toRem(90)
 		margin: toRem(20) 0
 		font-size: toRem(14)
@@ -73,6 +77,8 @@
 					left: 0
 					right: 0
 					transition: all .3s ease-in-out
+					& span
+						font-weight: 700
 					&:hover
 						background: transparent
 						outline: 1px solid #ef1b03
@@ -86,7 +92,6 @@
 						right: toRem(19)
 						top: 50%
 						transform: translate(0, -50%)
-						//margin-left: toRem(10)
 						width: 20px
 						height: 20px
 						padding: 3px
@@ -101,3 +106,28 @@
 		font-size: toRem(24)
 		font-weight: 700
 		text-align: center
+	&--skeleton
+		margin: 0 auto
+
+
+@media screen and (max-width: 768px)
+	.product
+		&-title
+			font-size: toRem(24)
+		&-desc
+			font-size: toRem(16)
+		&-selector
+			&__btn
+				padding: toRem(10) toRem(5)
+				font-size: toRem(20)
+		&-btn
+			&.btn
+				font-size: toRem(24)
+
+
+@media screen and (max-width: 360px)
+	.product
+		&-img
+			& img
+				top: toEm(-100)
+

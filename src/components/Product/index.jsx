@@ -4,8 +4,7 @@ import classNames from 'classnames';
 import './Product.sass';
 
 const Product = props => {
-    const { name, price, ing, imageUrl, types, sizes, category, rating } =
-        props;
+    const { name, price, ing, imageUrl, types, sizes } = props;
 
     let [productCount, setProductCount] = useState(0);
     const [activeType, setActiveType] = useState(0);

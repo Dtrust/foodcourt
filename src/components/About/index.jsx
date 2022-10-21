@@ -2,7 +2,7 @@ import './About.sass';
 
 const About = () => {
     return (
-        <section className="block about">
+        <section id="about" className="block about">
             <div className="container about-content">
                 <div className="title about-title">
                     <span className="title-decor about-title__decor">

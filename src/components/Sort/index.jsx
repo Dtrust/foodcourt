@@ -1,18 +1,28 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
+
+import { setSort } from '../../store/slices/filterSlice';
 
 import './Sort.sass';
 
-const Sort = props => {
-    const sortOptions = ['Popularity', 'Price', 'Name'];
+const sortOptions = [
+    { name: 'Popularity ↑', sortProperty: '-rating' },
+    { name: 'Popularity ↓', sortProperty: 'rating' },
+    { name: 'Price ↑', sortProperty: '-price' },
+    { name: 'Price ↓', sortProperty: 'price' },
+    { name: 'Name ↑', sortProperty: '-name' },
+    { name: 'Name ↓', sortProperty: 'name' },
+];
+
+const Sort = () => {
+    const dispatch = useDispatch();
+    const sort = useSelector(state => state.filterSlice.sort);
 
     const [openSort, setOpenSort] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(0);
 
-    const activeOption = sortOptions[selectedOption];
-
-    const onSelectOption = index => {
-        setSelectedOption(index);
+    const onSelectOption = obj => {
+        dispatch(setSort(obj));
         setOpenSort(false);
     };
 
@@ -34,22 +44,24 @@ const Sort = props => {
                     onClick={() => setOpenSort(!openSort)}
                     className="sort-label__btn"
                 >
-                    {activeOption}
+                    {sort.name}
                 </button>
             </div>
             {openSort && (
                 <div className="sort-popup">
                     <ul className="sort-popup__list">
-                        {sortOptions.map((name, index) => (
+                        {sortOptions.map((obj, index) => (
                             <li
                                 key={index}
-                                onClick={() => onSelectOption(index)}
+                                onClick={() => onSelectOption(obj)}
                                 className={classNames(
                                     'sort-popup__item',
-                                    selectedOption === index ? 'active' : ''
+                                    sort.sortProperty === obj.sortProperty
+                                        ? 'active'
+                                        : ''
                                 )}
                             >
-                                <span>{name}</span>
+                                <span>{obj.name}</span>
                             </li>
                         ))}
                     </ul>

@@ -11,27 +11,250 @@
 	transition: all .3s ease-in-out
 	z-index: 2
 	&--scroll
-		padding: toRem(15) 0
+		padding: toRem(10) 0
 		background: #111111
-		box-shadow: 0 14px 37px rgba(201, 201, 201, .55)
+		box-shadow: 0 14px 37px rgba(201, 201, 201, .26)
+		& .header
+			&-logo
+				& svg
+					width: toRem(60)
 	&-content
 		@include flexCenter
-		justify-content: space-around
+		justify-content: space-between
+	&-logo
+		& svg
+			width: toRem(85)
+			transition: all .5s ease-in-out
 	&-nav
 		&__list
 			@include flexCenter
 			column-gap: 30px
 		&__item
 			padding: 15px
+		&__link
+			position: relative
+			font-weight: 600
+			background-image: linear-gradient(to right, #f5b44f, #f5b44f 50%, #fff 50%)
+			background-size: 200% 100%
+			background-position: -100%
+			-webkit-background-clip: text
+			-webkit-text-fill-color: transparent
+			transition: all .3s ease-in-out
+			&::before
+				content: ''
+				background: #f5b44f
+				display: block
+				position: absolute
+				bottom: -5px
+				left: 0
+				width: 0
+				height: 1px
+			&:hover
+				background-position: 0
+				&::before
+					width: 100%
+			&.active
+				background-position: 0
+	&-search
+		margin-right: toRem(20)
+		& .search
+			&-field
+				width: 95%
+		&__btn
+			display: none
+	&-wrap
+		@include flexCenter
+		column-gap: toRem(40)
+		&:nth-of-type(1)
+			column-gap: toRem(20)
 	&-phone
 		@include flexCenter
 		flex-direction: column
+		&__link
+			@include flexCenter
+			& span
+				@include adaptiveFont(20, 14)
+				font-weight: 700
+			&::before
+				content: none
+		&__icon
+			display: block
+			margin-right: toEm(10)
+			fill: #f5b44f
 		&__callback
-			margin-top: toEm(5)
+			position: fixed
+			bottom: toRem(35)
+			right: toRem(45)
+			width: toRem(50)
+			height: toRem(50)
+			@include flexCenter
+			justify-content: center
+			color: #111111
+			background: #f5b44f
+			border-radius: 50%
+			& .callback
+				&-icon
+					fill: #111111
+
+.informer
+	@include flexCenter
+	position: relative
+	&-wrap
+		position: relative
+		width: fit-content
+		height: toRem(25)
+		margin-right: toEm(10)
+	&-total
+		position: absolute
+		top: 50%
+		transform: translate(0, -50%)
+		right: 0
+		font-weight: 700
+	&-icon
+		fill: #f5b44f
+	&-count
+		position: absolute
+		top: -7px
+		right: -7px
+		@include flexCenter
+		justify-content: center
+		width: toRem(20)
+		height: toRem(20)
+		font-size: toRem(11)
+		font-weight: 600
+		color: #f3f3f3
+		background: #ef1b03
+		border-radius: 50%
+
+
+@media screen and (min-width: 1024px)
+	.header
+		&-search
+			min-width: toRem(200)
+
+@media screen and (max-width: 1023px)
+	.header
+		&-nav
+			&__list
+				column-gap: toRem(10)
+			&__item
+				padding: toRem(10)
+		&-phone
+			&__link
+				justify-content: center
+				width: toRem(30)
+				height: toRem(30)
+				background: #66a117
+				border-radius: 50%
+				& span
+					display: none
+			&__icon
+				margin-right: 0
+				fill: #f3f3f3
 
 
 @media screen and (max-width: 768px)
 	.header
+		padding: toRem(10) 0
+		&-logo
+			& svg
+				width: toRem(60)
 		&-nav
+			order: -1
 			&__list
+				position: fixed
+				bottom: 0
+				left: 0
+				width: 100%
+				height: calc(100vh - toRem(60))
+				flex-direction: column
+				justify-content: center
+				background: rgba(0, 0, 0, .9)
 				display: none
+			&__item
+				font-size: toRem(32)
+			& .burger
+				height: toRem(17)
+				padding: 0
+				display: flex
+				align-items: center
+				flex-direction: column
+				justify-content: space-between
+				background: none
+				border: 0
+				&:hover
+					background: none
+				&-line
+					width: toRem(23)
+					height: toRem(3)
+					margin: 0
+					display: block
+					font-size: 0
+					background: #ef1b03
+					border-radius: toRem(3px)
+					-webkit-transition: all .5s cubic-bezier(.77,.2,.05,1)
+					transition: all .5s cubic-bezier(.77,.2,.05,1)
+		&-phone
+			position: relative
+			top: -2px
+		&.active
+			& .burger
+				&-line
+					transition: all 600ms cubic-bezier(0.9, 0, 0.33, 1)
+					&:nth-child(1)
+						transform: rotate(45deg) translate(4px, 4px)
+					&:nth-child(2)
+						background: transparent
+					&:nth-child(3)
+						transform: rotate(135deg) translate(-6px, 6px)
+			& .header-nav__list
+				display: flex
+
+
+@media screen and (max-width: 575px)
+	.header
+		&-wrap
+			column-gap: toRem(20)
+
+
+@media screen and (max-width: 525px)
+	.header
+		&-wrap
+			&:last-of-type
+				margin-right: toRem(10)
+				flex: 1
+				justify-content: flex-end
+		&-search
+			//visibility: hidden
+			//width: 0
+			//height: 0
+			position: relative
+			width: 94%
+			opacity: 0
+			z-index: -1
+			transition: all .3s ease-in-out
+			&.search
+				position: fixed
+				top: toRem(65)
+				left: 0
+				right: 0
+				margin: auto
+			&__btn
+				display: block
+				& svg
+					fill: #ef1b03
+			& .search
+				&-field
+					width: 100%
+					//padding: 0
+				&-btn
+					right: 1px
+			&.active
+				//visibility: visible
+				width: 94%
+				opacity: 1
+				z-index: 0
+				//height: toRem(35)
+				& .search-field
+					height: toRem(35)
+					padding: 0 toRem(45) 0 toRem(10)
