@@ -1,22 +1,30 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
+import qs from 'qs';
 
 import {
     setCategoryID,
     updateProductsLimit,
     setProductsLimit,
+    setFilters,
 } from '../../store/slices/filterSlice';
 
 import { Categories, Product, Sort, Skeleton } from '../index';
 
 import './Menu.sass';
 import { SearchContext } from '../../App';
+import { sortOptions } from '../Sort';
 
 const { REACT_APP_DB } = process.env;
 
 const Menu = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const isParams = useRef(false);
+    const isMounted = useRef(false);
 
     const { categoryID, sort, productsLimit } = useSelector(
         state => state.filterSlice
@@ -52,7 +60,7 @@ const Menu = () => {
             });
     };
 
-    useEffect(() => {
+    const fetchProducts = () => {
         setIsLoading(true);
 
         if (!productsLength) {
@@ -67,6 +75,47 @@ const Menu = () => {
             loadProductsLength();
         }
         loadProducts();
+    };
+
+    // If first render, then check url-params and save to redux
+    useEffect(() => {
+        if (window.location.search) {
+            const params = qs.parse(window.location.search.substring(1));
+
+            const sort = sortOptions.find(
+                obj => obj.sortProperty === params.sortProperty
+            );
+
+            dispatch(
+                setFilters({
+                    ...params,
+                    sort,
+                })
+            );
+
+            isParams.current = true;
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!isParams.current) {
+            fetchProducts();
+        }
+
+        isParams.current = false;
+    }, [categoryID, sortProperty, productsLimit, searchValue]);
+
+    useEffect(() => {
+        if (isMounted.current) {
+            const queryString = qs.stringify({
+                sortProperty: sort.sortProperty,
+                categoryID,
+                productsLimit,
+            });
+
+            navigate(`?${queryString}`);
+        }
+        isMounted.current = true;
     }, [categoryID, sortProperty, productsLimit, searchValue]);
 
     const loadMore = () => {

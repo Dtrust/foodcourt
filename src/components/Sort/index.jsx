@@ -6,7 +6,7 @@ import { setSort } from '../../store/slices/filterSlice';
 
 import './Sort.sass';
 
-const sortOptions = [
+export const sortOptions = [
     { name: 'Popularity ↑', sortProperty: '-rating' },
     { name: 'Popularity ↓', sortProperty: 'rating' },
     { name: 'Price ↑', sortProperty: '-price' },
