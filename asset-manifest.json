@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/foodcourt/static/css/main.5f5b0ef0.css",
-    "main.js": "/foodcourt/static/js/main.69cae887.js",
+    "main.js": "/foodcourt/static/js/main.1cbf47f5.js",
     "static/media/bg.jpg": "/foodcourt/static/media/bg.32ab415bd50de3d972bd.jpg",
     "static/media/top.png": "/foodcourt/static/media/top.e62443c87adbf9f36cd8.png",
     "static/media/Montserrat-Bold.woff": "/foodcourt/static/media/Montserrat-Bold.3155f256200b7d559607.woff",
@@ -17,10 +17,10 @@
     "static/media/icons.svg": "/foodcourt/static/media/icons.0b041bf9612c272464db8b80d67c1c4d.svg",
     "index.html": "/foodcourt/index.html",
     "main.5f5b0ef0.css.map": "/foodcourt/static/css/main.5f5b0ef0.css.map",
-    "main.69cae887.js.map": "/foodcourt/static/js/main.69cae887.js.map"
+    "main.1cbf47f5.js.map": "/foodcourt/static/js/main.1cbf47f5.js.map"
   },
   "entrypoints": [
     "static/css/main.5f5b0ef0.css",
-    "static/js/main.69cae887.js"
+    "static/js/main.1cbf47f5.js"
   ]
 }
