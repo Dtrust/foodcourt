@@ -1,10 +1,23 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { CartItem, CartEmpty } from '../components';
+import { clearCart } from '../store/slices/cartSlice';
 
 const Cart = props => {
-    useEffect(() => {
+    const dispatch = useDispatch();
+    const { totalPrice, items } = useSelector(state => state.cart);
+    const totalCount = useSelector(state => state.cart.totalCount);
+
+    const onClickClear = () => dispatch(clearCart());
+
+    React.useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    if (!totalCount) {
+        return <CartEmpty />;
+    }
 
     return (
         <div className="block-top cart">
@@ -13,7 +26,7 @@ const Cart = props => {
                     <span className="title-decor cart-title__decor">Cart</span>
                     <h1 className="title-text cart-title__text">Cart</h1>
                 </div>
-                <button className="cart-btn--clear">
+                <button onClick={onClickClear} className="cart-btn--clear">
                     <svg
                         width="20"
                         height="20"
@@ -52,202 +65,19 @@ const Cart = props => {
                     </svg>
                     <span>Empty cart</span>
                 </button>
-                <ul className="cart-list">
-                    <li className="cart-item">
-                        <div className="cart-item__img">
-                            <img
-                                src="https://i.postimg.cc/TwGwMDfz/4sezona.png"
-                                alt="Four Seasons"
-                            />
-                        </div>
-                        <div className="cart-item__info">
-                            <h4 className="cart-item__title">Four Seasons</h4>
-                            <p className="cart-item__desc">
-                                mozzarella, gorgonzola, taleggio cheese, fontina
-                                cheese, smoked, provola branza, salam calabrez
-                                picant
-                            </p>
-                            <div className="cart-item__options cart-options">
-                                <p className="cart-options__item cart-options--type">
-                                    Dough:
-                                    <span>Thin</span>
-                                </p>
-                                <p className="cart-options__item cart-options--size">
-                                    Size:
-                                    <span>50cm</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div className="cart-item__wrapper">
-                            <div className="cart-item__count cart-count">
-                                <button className="cart-count__btn btn--minus">
-                                    <svg
-                                        width="10"
-                                        height="10"
-                                        viewBox="0 0 10 10"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path d="M5.92001 3.84V5.76V8.64C5.92001 9.17016 5.49017 9.6 4.96001 9.6C4.42985 9.6 4.00001 9.17016 4.00001 8.64L4 5.76L4.00001 3.84V0.96C4.00001 0.42984 4.42985 0 4.96001 0C5.49017 0 5.92001 0.42984 5.92001 0.96V3.84Z" />
-                                        <path d="M5.75998 5.92001L3.83998 5.92001L0.959977 5.92001C0.429817 5.92001 -2.29533e-05 5.49017 -2.29301e-05 4.96001C-2.2907e-05 4.42985 0.429817 4.00001 0.959977 4.00001L3.83998 4L5.75998 4.00001L8.63998 4.00001C9.17014 4.00001 9.59998 4.42985 9.59998 4.96001C9.59998 5.49017 9.17014 5.92001 8.63998 5.92001L5.75998 5.92001Z" />
-                                    </svg>
-                                </button>
-                                <span className="cart-count__txt">5</span>
-                                <button className="cart-count__btn btn--plus">
-                                    <svg
-                                        width="10"
-                                        height="10"
-                                        viewBox="0 0 10 10"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path d="M5.92001 3.84V5.76V8.64C5.92001 9.17016 5.49017 9.6 4.96001 9.6C4.42985 9.6 4.00001 9.17016 4.00001 8.64L4 5.76L4.00001 3.84V0.96C4.00001 0.42984 4.42985 0 4.96001 0C5.49017 0 5.92001 0.42984 5.92001 0.96V3.84Z" />
-                                        <path d="M5.75998 5.92001L3.83998 5.92001L0.959977 5.92001C0.429817 5.92001 -2.29533e-05 5.49017 -2.29301e-05 4.96001C-2.2907e-05 4.42985 0.429817 4.00001 0.959977 4.00001L3.83998 4L5.75998 4.00001L8.63998 4.00001C9.17014 4.00001 9.59998 4.42985 9.59998 4.96001C9.59998 5.49017 9.17014 5.92001 8.63998 5.92001L5.75998 5.92001Z" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <div className="cart-item__price">50$</div>
-                        </div>
-                        <button
-                            className="cart-item__btn--delete"
-                            title="delete"
-                        >
-                            <span className="visually-hidden">Delete</span>
-                        </button>
-                    </li>
-                    <li className="cart-item">
-                        <div className="cart-item__img">
-                            <img
-                                src="https://i.postimg.cc/TwGwMDfz/4sezona.png"
-                                alt="Four Seasons"
-                            />
-                        </div>
-                        <div className="cart-item__info">
-                            <h4 className="cart-item__title">Four Seasons</h4>
-                            <p className="cart-item__desc">
-                                mozzarella, gorgonzola, taleggio cheese, fontina
-                                cheese, smoked, provola branza, salam calabrez
-                                picant
-                            </p>
-                            <div className="cart-item__options cart-options">
-                                <p className="cart-options__item cart-options--type">
-                                    Dough:
-                                    <span>Thin</span>
-                                </p>
-                                <p className="cart-options__item cart-options--size">
-                                    Size:
-                                    <span>50cm</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div className="cart-item__wrapper">
-                            <div className="cart-item__count cart-count">
-                                <button className="cart-count__btn btn--minus">
-                                    <svg
-                                        width="10"
-                                        height="10"
-                                        viewBox="0 0 10 10"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path d="M5.92001 3.84V5.76V8.64C5.92001 9.17016 5.49017 9.6 4.96001 9.6C4.42985 9.6 4.00001 9.17016 4.00001 8.64L4 5.76L4.00001 3.84V0.96C4.00001 0.42984 4.42985 0 4.96001 0C5.49017 0 5.92001 0.42984 5.92001 0.96V3.84Z" />
-                                        <path d="M5.75998 5.92001L3.83998 5.92001L0.959977 5.92001C0.429817 5.92001 -2.29533e-05 5.49017 -2.29301e-05 4.96001C-2.2907e-05 4.42985 0.429817 4.00001 0.959977 4.00001L3.83998 4L5.75998 4.00001L8.63998 4.00001C9.17014 4.00001 9.59998 4.42985 9.59998 4.96001C9.59998 5.49017 9.17014 5.92001 8.63998 5.92001L5.75998 5.92001Z" />
-                                    </svg>
-                                </button>
-                                <span className="cart-count__txt">5</span>
-                                <button className="cart-count__btn btn--plus">
-                                    <svg
-                                        width="10"
-                                        height="10"
-                                        viewBox="0 0 10 10"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path d="M5.92001 3.84V5.76V8.64C5.92001 9.17016 5.49017 9.6 4.96001 9.6C4.42985 9.6 4.00001 9.17016 4.00001 8.64L4 5.76L4.00001 3.84V0.96C4.00001 0.42984 4.42985 0 4.96001 0C5.49017 0 5.92001 0.42984 5.92001 0.96V3.84Z" />
-                                        <path d="M5.75998 5.92001L3.83998 5.92001L0.959977 5.92001C0.429817 5.92001 -2.29533e-05 5.49017 -2.29301e-05 4.96001C-2.2907e-05 4.42985 0.429817 4.00001 0.959977 4.00001L3.83998 4L5.75998 4.00001L8.63998 4.00001C9.17014 4.00001 9.59998 4.42985 9.59998 4.96001C9.59998 5.49017 9.17014 5.92001 8.63998 5.92001L5.75998 5.92001Z" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <div className="cart-item__price">50$</div>
-                        </div>
-                        <button
-                            className="cart-item__btn--delete"
-                            title="delete"
-                        >
-                            <span className="visually-hidden">Delete</span>
-                        </button>
-                    </li>
-                    <li className="cart-item">
-                        <div className="cart-item__img">
-                            <img
-                                src="https://i.postimg.cc/TwGwMDfz/4sezona.png"
-                                alt="Four Seasons"
-                            />
-                        </div>
-                        <div className="cart-item__info">
-                            <h4 className="cart-item__title">Four Seasons</h4>
-                            <p className="cart-item__desc">
-                                mozzarella, gorgonzola, taleggio cheese, fontina
-                                cheese, smoked, provola branza, salam calabrez
-                                picant
-                            </p>
-                            <div className="cart-item__options cart-options">
-                                <p className="cart-options__item cart-options--type">
-                                    Dough:
-                                    <span>Thin</span>
-                                </p>
-                                <p className="cart-options__item cart-options--size">
-                                    Size:
-                                    <span>50cm</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div className="cart-item__wrapper">
-                            <div className="cart-item__count cart-count">
-                                <button className="cart-count__btn btn--minus">
-                                    <svg
-                                        width="10"
-                                        height="10"
-                                        viewBox="0 0 10 10"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path d="M5.92001 3.84V5.76V8.64C5.92001 9.17016 5.49017 9.6 4.96001 9.6C4.42985 9.6 4.00001 9.17016 4.00001 8.64L4 5.76L4.00001 3.84V0.96C4.00001 0.42984 4.42985 0 4.96001 0C5.49017 0 5.92001 0.42984 5.92001 0.96V3.84Z" />
-                                        <path d="M5.75998 5.92001L3.83998 5.92001L0.959977 5.92001C0.429817 5.92001 -2.29533e-05 5.49017 -2.29301e-05 4.96001C-2.2907e-05 4.42985 0.429817 4.00001 0.959977 4.00001L3.83998 4L5.75998 4.00001L8.63998 4.00001C9.17014 4.00001 9.59998 4.42985 9.59998 4.96001C9.59998 5.49017 9.17014 5.92001 8.63998 5.92001L5.75998 5.92001Z" />
-                                    </svg>
-                                </button>
-                                <span className="cart-count__txt">5</span>
-                                <button className="cart-count__btn btn--plus">
-                                    <svg
-                                        width="10"
-                                        height="10"
-                                        viewBox="0 0 10 10"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path d="M5.92001 3.84V5.76V8.64C5.92001 9.17016 5.49017 9.6 4.96001 9.6C4.42985 9.6 4.00001 9.17016 4.00001 8.64L4 5.76L4.00001 3.84V0.96C4.00001 0.42984 4.42985 0 4.96001 0C5.49017 0 5.92001 0.42984 5.92001 0.96V3.84Z" />
-                                        <path d="M5.75998 5.92001L3.83998 5.92001L0.959977 5.92001C0.429817 5.92001 -2.29533e-05 5.49017 -2.29301e-05 4.96001C-2.2907e-05 4.42985 0.429817 4.00001 0.959977 4.00001L3.83998 4L5.75998 4.00001L8.63998 4.00001C9.17014 4.00001 9.59998 4.42985 9.59998 4.96001C9.59998 5.49017 9.17014 5.92001 8.63998 5.92001L5.75998 5.92001Z" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <div className="cart-item__price">50$</div>
-                        </div>
-                        <button
-                            className="cart-item__btn--delete"
-                            title="delete"
-                        >
-                            <span className="visually-hidden">Delete</span>
-                        </button>
-                    </li>
-                </ul>
+                <div className="cart-list">
+                    {items.map(item => (
+                        <CartItem key={item.id} {...item} />
+                    ))}
+                </div>
                 <div className="cart-total">
                     <p className="cart-total__item total--count">
                         Total:
-                        <span>5 pcs</span>
+                        <span>{totalCount} pcs</span>
                     </p>
                     <p className="cart-total__item total--price">
                         Order Price:
-                        <span>50$</span>
+                        <span>{totalPrice}$</span>
                     </p>
                 </div>
                 <div className="cart-actions">

@@ -7,5 +7,7 @@ export { default as Skeleton } from './Product/Skeleton';
 export { default as Top } from './Top';
 export { default as Menu } from './Menu';
 export { default as About } from './About';
+export { default as CartItem } from './CartItem';
+export { default as CartEmpty } from './CartEmpty';
 export { default as Location } from './Location';
 export { default as Footer } from './Footer';

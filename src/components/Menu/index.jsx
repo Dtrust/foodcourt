@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
@@ -23,20 +23,20 @@ const Menu = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const isParams = useRef(false);
-    const isMounted = useRef(false);
+    const isParams = React.useRef(false);
+    const isMounted = React.useRef(false);
 
     const { categoryID, sort, productsLimit } = useSelector(
-        state => state.filterSlice
+        state => state.filter
     );
 
     const sortProperty = sort.sortProperty;
 
-    const { searchValue } = useContext(SearchContext);
+    const { searchValue } = React.useContext(SearchContext);
 
-    const [products, setProducts] = useState([]);
-    const [productsLength, setProductsLength] = useState(0);
-    const [isLoading, setIsLoading] = useState(true);
+    const [products, setProducts] = React.useState([]);
+    const [productsLength, setProductsLength] = React.useState(0);
+    const [isLoading, setIsLoading] = React.useState(true);
 
     const onChangeCategory = id => {
         dispatch(setCategoryID(id));
@@ -78,7 +78,7 @@ const Menu = () => {
     };
 
     // If first render, then check url-params and save to redux
-    useEffect(() => {
+    React.useEffect(() => {
         if (window.location.search) {
             const params = qs.parse(window.location.search.substring(1));
 
@@ -97,7 +97,7 @@ const Menu = () => {
         }
     }, []);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (!isParams.current) {
             fetchProducts();
         }
@@ -105,7 +105,7 @@ const Menu = () => {
         isParams.current = false;
     }, [categoryID, sortProperty, productsLimit, searchValue]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (isMounted.current) {
             const queryString = qs.stringify({
                 sortProperty: sort.sortProperty,

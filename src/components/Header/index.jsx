@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
 import { HashLink } from 'react-router-hash-link';
+import classNames from 'classnames';
 
 import { Search } from '../../components';
 
 import './Header.sass';
-import classNames from 'classnames';
 
 import { ReactComponent as Logo } from '../../assets/images/logo.svg';
 import icons from '../../assets/images/icons.svg';
@@ -19,14 +19,19 @@ const Header = ({ searchValue, setSearchValue }) => {
         { id: 3, name: 'Contacts', link: '#contacts' },
     ];
 
+    const { totalPrice } = useSelector(state => state.cart);
+    // const totalCartCount = items.reduce((sum, item) => sum + item.count, 0);
+    const totalCartCount = useSelector(state => state.cart.totalCount);
+
     const phoneNumber = '+38 (050) 111 22 33';
 
-    const [isMobileSearchActive, setIsMobileSearchActive] = useState(false);
+    const [isMobileSearchActive, setIsMobileSearchActive] =
+        React.useState(false);
 
-    const [scroll, setScroll] = useState(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [scroll, setScroll] = React.useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
-    useEffect(() => {
+    React.useEffect(() => {
         window.addEventListener('scroll', () => {
             setScroll(window.scrollY > 50);
         });
@@ -49,7 +54,7 @@ const Header = ({ searchValue, setSearchValue }) => {
         }
     };
 
-    const mobileSearchFocus = useRef(null);
+    const mobileSearchFocus = React.useRef(null);
 
     const handleMobileSearch = () => {
         mobileSearchFocus.current.focus();
@@ -133,7 +138,7 @@ const Header = ({ searchValue, setSearchValue }) => {
                             <div className="informer-wrap">
                                 <p className="informer-total">
                                     <span className="informer-total__price">
-                                        0
+                                        {totalPrice}
                                     </span>
                                     <span className="informer-total__mount">
                                         $
@@ -147,7 +152,9 @@ const Header = ({ searchValue, setSearchValue }) => {
                             >
                                 <use href={`${icons}#cart`} />
                             </svg>
-                            <span className="informer-count">0</span>
+                            <span className="informer-count">
+                                {totalCartCount}
+                            </span>
                         </Link>
                     </div>
 

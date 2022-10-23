@@ -1,0 +1,15 @@
+@import './src/sass/variables'
+@import './src/sass/mixins'
+@import './src/sass/functions'
+
+
+.empty
+	@include flexCenter
+	justify-content: center
+	flex-direction: column
+	padding-top: toRem(80)!important
+	padding-bottom: toRem(80)
+	height: 50vh!important
+	&-img
+		max-width: 230px
+		margin-bottom: toRem(20)

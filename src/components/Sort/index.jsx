@@ -17,7 +17,9 @@ export const sortOptions = [
 
 const Sort = () => {
     const dispatch = useDispatch();
-    const sort = useSelector(state => state.filterSlice.sort);
+    const sort = useSelector(state => state.filter.sort);
+
+    const sortRef = React.useRef();
 
     const [openSort, setOpenSort] = useState(false);
 
@@ -26,8 +28,25 @@ const Sort = () => {
         setOpenSort(false);
     };
 
+    React.useEffect(() => {
+        const handleClickOutsideSort = e => {
+            if (!e.path.includes(sortRef.current)) {
+                setOpenSort(false);
+            }
+        };
+
+        document.body.addEventListener('click', handleClickOutsideSort);
+
+        return () => {
+            document.body.removeEventListener('click', handleClickOutsideSort);
+        };
+    }, []);
+
     return (
-        <div className="sort">
+        <div
+            ref={sortRef}
+            className={classNames('sort', openSort ? 'active' : '')}
+        >
             <div className="sort-label">
                 <svg
                     className="sort-label__icon"

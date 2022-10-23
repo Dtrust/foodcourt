@@ -9,6 +9,7 @@
 		@include flexCenter
 		column-gap: toRem(10)
 		&__icon
+			transition: .5s ease-in-out
 			& path
 				fill: #f5b44f
 		&__btn
@@ -62,3 +63,8 @@
 						width: 100%
 						height: 1px
 						background: #f3f3f3
+	&.active
+		& .sort
+			&-label
+				&__icon
+					transform: rotate(180deg)

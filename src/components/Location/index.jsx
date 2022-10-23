@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
 import './Location.sass';
@@ -22,15 +22,15 @@ const Location = () => {
         googleMapsApiKey: `${REACT_APP_LOC}`,
     });
 
-    const [map, setMap] = useState(null);
+    const [map, setMap] = React.useState(null);
 
-    const onLoad = useCallback(map => {
+    const onLoad = React.useCallback(map => {
         const bounds = new window.google.maps.LatLngBounds(center);
         map.fitBounds(bounds);
         setMap(map);
     }, []);
 
-    const onUnmount = useCallback(map => {
+    const onUnmount = React.useCallback(map => {
         setMap(null);
     }, []);
 
