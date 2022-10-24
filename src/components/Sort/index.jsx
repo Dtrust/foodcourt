@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 
@@ -21,7 +21,7 @@ const Sort = () => {
 
     const sortRef = React.useRef();
 
-    const [openSort, setOpenSort] = useState(false);
+    const [openSort, setOpenSort] = React.useState(false);
 
     const onSelectOption = obj => {
         dispatch(setSort(obj));

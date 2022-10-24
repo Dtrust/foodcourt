@@ -20,13 +20,13 @@ export const filterSlice = createSlice({
             state.sort = action.payload;
         },
         updateProductsLimit(state) {
-            state.productsLimit = state.productsLimit + state.productsLimit;
+            state.productsLimit = state.productsLimit + 9;
         },
         setProductsLimit(state, action) {
             state.productsLimit = action.payload;
         },
         setFilters(state, action) {
-            state.productsLimit = action.payload.productsLimit;
+            state.productsLimit = +action.payload.productsLimit;
             state.sort = action.payload.sort;
             state.categoryID = Number(action.payload.categoryID);
         },

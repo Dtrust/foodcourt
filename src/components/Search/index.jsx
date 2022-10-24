@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React from 'react';
 import debounce from 'lodash.debounce';
 
 import classNames from 'classnames';
@@ -9,10 +9,10 @@ import icons from '../../assets/images/icons.svg';
 import { SearchContext } from '../../App';
 
 const Search = ({ isMobileSearchActive, cssClass, handleFocus }) => {
-    const [localValue, setLocalValue] = useState();
-    const { setSearchValue } = useContext(SearchContext);
+    const [localValue, setLocalValue] = React.useState();
+    const { setSearchValue } = React.useContext(SearchContext);
 
-    const updateSearchValue = useCallback(
+    const updateSearchValue = React.useCallback(
         debounce(str => {
             setSearchValue(str);
             window.location.href = '/#menu';

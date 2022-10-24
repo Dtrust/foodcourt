@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CartItem, CartEmpty } from '../components';
 import { clearCart } from '../store/slices/cartSlice';
 
-const Cart = props => {
+const Cart = () => {
     const dispatch = useDispatch();
     const { totalPrice, items } = useSelector(state => state.cart);
     const totalCount = useSelector(state => state.cart.totalCount);

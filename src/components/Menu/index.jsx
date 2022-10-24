@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import qs from 'qs';
 
 import {
@@ -16,8 +15,7 @@ import { Categories, Product, Sort, Skeleton } from '../index';
 import './Menu.sass';
 import { SearchContext } from '../../App';
 import { sortOptions } from '../Sort';
-
-const { REACT_APP_DB } = process.env;
+import { fetchProducts } from '../../store/slices/productsSlice';
 
 const Menu = () => {
     const dispatch = useDispatch();
@@ -31,12 +29,8 @@ const Menu = () => {
     );
 
     const sortProperty = sort.sortProperty;
-
     const { searchValue } = React.useContext(SearchContext);
-
-    const [products, setProducts] = React.useState([]);
-    const [productsLength, setProductsLength] = React.useState(0);
-    const [isLoading, setIsLoading] = React.useState(true);
+    const { items, status } = useSelector(state => state.products);
 
     const onChangeCategory = id => {
         dispatch(setCategoryID(id));
@@ -46,36 +40,6 @@ const Menu = () => {
     const order = sortProperty.includes('-') ? 'asc' : 'desc';
     const sortBy = sortProperty.replace('-', '');
     const search = searchValue ? `search=${searchValue}` : '';
-
-    const goods = products.map(obj => <Product key={obj.id} {...obj} />);
-
-    const loadProducts = () => {
-        axios
-            .get(
-                `${REACT_APP_DB}?p=1&l=${productsLimit}&${category}&sortBy=${sortBy}&order=${order}&${search}`
-            )
-            .then(res => {
-                setProducts(res.data);
-                setIsLoading(false);
-            });
-    };
-
-    const fetchProducts = () => {
-        setIsLoading(true);
-
-        if (!productsLength) {
-            const loadProductsLength = async () => {
-                await fetch(`${REACT_APP_DB}`)
-                    .then(res => res.json())
-                    .then(items => {
-                        setProductsLength(items.length);
-                        console.log('request');
-                    });
-            };
-            loadProductsLength();
-        }
-        loadProducts();
-    };
 
     // If first render, then check url-params and save to redux
     React.useEffect(() => {
@@ -99,7 +63,15 @@ const Menu = () => {
 
     React.useEffect(() => {
         if (!isParams.current) {
-            fetchProducts();
+            dispatch(
+                fetchProducts({
+                    category,
+                    order,
+                    sortBy,
+                    search,
+                    productsLimit,
+                })
+            );
         }
 
         isParams.current = false;
@@ -119,11 +91,13 @@ const Menu = () => {
     }, [categoryID, sortProperty, productsLimit, searchValue]);
 
     const loadMore = () => {
-        if (productsLength > productsLimit) {
+        if (items.length >= productsLimit) {
             dispatch(updateProductsLimit());
             dispatch(setProductsLimit);
         }
     };
+
+    const products = items.map(obj => <Product key={obj.id} {...obj} />);
 
     return (
         <section id="menu" className="block menu">
@@ -132,34 +106,46 @@ const Menu = () => {
                     <span className="title-decor menu-title__decor">Menu</span>
                     <h2 className="title-text menu-title__text">Menu</h2>
                 </div>
-                <div className="menu-categories categories">
-                    <Categories
-                        categoryID={categoryID}
-                        onChangeCategory={onChangeCategory}
-                    />
-                </div>
-                <div className="menu-sort">
-                    <Sort />
-                </div>
-                <div className="menu-products">
-                    {isLoading
-                        ? [...new Array(productsLimit)].map((_, index) => (
-                              <Skeleton key={index} />
-                          ))
-                        : goods}
-                </div>
-                <div className="menu-showmore">
-                    {productsLength > productsLimit ? (
-                        <button
-                            onClick={loadMore}
-                            className="btn btn-transparent menu-showmore__btn"
-                        >
-                            {isLoading ? 'loading...' : 'Show more'}
-                        </button>
-                    ) : (
-                        ''
-                    )}
-                </div>
+                {status === 'error' ? (
+                    <div className="error">
+                        <p className="error-msg">
+                            Sorry, products does't load, please try again later
+                        </p>
+                    </div>
+                ) : (
+                    <>
+                        <div className="menu-categories categories">
+                            <Categories
+                                categoryID={categoryID}
+                                onChangeCategory={onChangeCategory}
+                            />
+                        </div>
+                        <div className="menu-sort">
+                            <Sort />
+                        </div>
+                        <div className="menu-products">
+                            {status === 'loading'
+                                ? [...new Array(productsLimit)].map(
+                                      (_, index) => <Skeleton key={index} />
+                                  )
+                                : products}
+                        </div>
+                        <div className="menu-showmore">
+                            {items.length >= productsLimit ? (
+                                <button
+                                    onClick={loadMore}
+                                    className="btn btn-transparent menu-showmore__btn"
+                                >
+                                    {status === 'loading'
+                                        ? 'loading...'
+                                        : 'Show more'}
+                                </button>
+                            ) : (
+                                ''
+                            )}
+                        </div>
+                    </>
+                )}
             </div>
         </section>
     );

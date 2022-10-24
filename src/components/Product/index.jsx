@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 
@@ -10,8 +10,8 @@ const Product = props => {
     const dispatch = useDispatch();
     const { id, name, price, ing, imageUrl, types, sizes } = props;
 
-    const [activeType, setActiveType] = useState(0);
-    const [activeSize, setActiveSize] = useState(0);
+    const [activeType, setActiveType] = React.useState(0);
+    const [activeSize, setActiveSize] = React.useState(0);
 
     const cartItem = useSelector(state =>
         state.cart.items.find(obj => obj.id === id)
