@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     categoryID: 0,
     productsLimit: 9, //products per page
+    searchValue: '',
     sort: {
         name: 'Popularity ↓',
         sortProperty: 'rating',
@@ -16,11 +17,14 @@ export const filterSlice = createSlice({
         setCategoryID(state, action) {
             state.categoryID = action.payload;
         },
-        setSort(state, action) {
-            state.sort = action.payload;
-        },
         updateProductsLimit(state) {
             state.productsLimit = state.productsLimit + 9;
+        },
+        setSearchValue(state, action) {
+            state.searchValue = action.payload;
+        },
+        setSort(state, action) {
+            state.sort = action.payload;
         },
         setProductsLimit(state, action) {
             state.productsLimit = action.payload;
@@ -33,10 +37,13 @@ export const filterSlice = createSlice({
     },
 });
 
+export const filterSelector = state => state.filter;
+
 export const {
     setCategoryID,
-    setSort,
     updateProductsLimit,
+    setSearchValue,
+    setSort,
     setProductsLimit,
     setFilters,
 } = filterSlice.actions;

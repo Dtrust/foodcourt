@@ -1,5 +1,5 @@
 import React from 'react';
-import { About, Menu, Top } from '../components';
+import { About, Menu, Top } from '../../components';
 
 const Home = () => {
     return (

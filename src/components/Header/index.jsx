@@ -5,6 +5,7 @@ import { HashLink } from 'react-router-hash-link';
 import classNames from 'classnames';
 
 import { Search } from '../../components';
+import { cartSelector } from '../../store/slices/cartSlice';
 
 import './Header.sass';
 
@@ -12,6 +13,8 @@ import { ReactComponent as Logo } from '../../assets/images/logo.svg';
 import icons from '../../assets/images/icons.svg';
 
 const Header = ({ searchValue, setSearchValue }) => {
+    const location = useLocation();
+
     const menuItems = [
         { id: 0, name: 'Menu', link: '#menu' },
         { id: 1, name: 'About', link: '#about' },
@@ -19,9 +22,7 @@ const Header = ({ searchValue, setSearchValue }) => {
         { id: 3, name: 'Contacts', link: '#contacts' },
     ];
 
-    const { totalPrice } = useSelector(state => state.cart);
-    // const totalCartCount = items.reduce((sum, item) => sum + item.count, 0);
-    const totalCartCount = useSelector(state => state.cart.totalCount);
+    const { totalPrice, totalCount } = useSelector(cartSelector);
 
     const phoneNumber = '+38 (050) 111 22 33';
 
@@ -61,7 +62,13 @@ const Header = ({ searchValue, setSearchValue }) => {
         setIsMobileSearchActive(!isMobileSearchActive);
     };
 
-    const location = useLocation();
+    const isCartPage = () => {
+        if (location.pathname === '/cart') {
+            return true;
+        } else {
+            return false;
+        }
+    };
 
     const isNavLinkActive = anchor => {
         if (location.hash === anchor) {
@@ -123,40 +130,46 @@ const Header = ({ searchValue, setSearchValue }) => {
                         </ul>
                     </nav>
                 </div>
-
-                <Search
-                    isMobileSearchActive={isMobileSearchActive}
-                    cssClass={'header-search'}
-                    handleFocus={mobileSearchFocus}
-                    searchValue={searchValue}
-                    setSearchValue={setSearchValue}
-                />
-
+                {!isCartPage() ? (
+                    <Search
+                        isMobileSearchActive={isMobileSearchActive}
+                        cssClass={'header-search'}
+                        handleFocus={mobileSearchFocus}
+                        searchValue={searchValue}
+                        setSearchValue={setSearchValue}
+                    />
+                ) : (
+                    ''
+                )}
                 <div className="header-wrap">
-                    <div className="header-cart">
-                        <Link to="/cart" className="informer" title="cart">
-                            <div className="informer-wrap">
-                                <p className="informer-total">
-                                    <span className="informer-total__price">
-                                        {totalPrice}
-                                    </span>
-                                    <span className="informer-total__mount">
-                                        $
-                                    </span>
-                                </p>
-                            </div>
-                            <svg
-                                className={'informer-icon'}
-                                width="25"
-                                height="25"
-                            >
-                                <use href={`${icons}#cart`} />
-                            </svg>
-                            <span className="informer-count">
-                                {totalCartCount}
-                            </span>
-                        </Link>
-                    </div>
+                    {location.pathname !== '/cart' ? (
+                        <div className="header-cart">
+                            <Link to="/cart" className="informer" title="cart">
+                                <div className="informer-wrap">
+                                    <p className="informer-total">
+                                        <span className="informer-total__price">
+                                            {totalPrice}
+                                        </span>
+                                        <span className="informer-total__mount">
+                                            $
+                                        </span>
+                                    </p>
+                                </div>
+                                <svg
+                                    className={'informer-icon'}
+                                    width="25"
+                                    height="25"
+                                >
+                                    <use href={`${icons}#cart`} />
+                                </svg>
+                                <span className="informer-count">
+                                    {totalCount}
+                                </span>
+                            </Link>
+                        </div>
+                    ) : (
+                        ''
+                    )}
 
                     <div className="header-phone">
                         <a
@@ -187,15 +200,18 @@ const Header = ({ searchValue, setSearchValue }) => {
                             <span className="visually-hidden">Callback</span>
                         </button>
                     </div>
-
-                    <button
-                        className="header-search__btn"
-                        onClick={handleMobileSearch}
-                    >
-                        <svg className="search-icon" width="20" height="20">
-                            <use href={`${icons}#search`} />
-                        </svg>
-                    </button>
+                    {!isCartPage() ? (
+                        <button
+                            className="header-search__btn"
+                            onClick={handleMobileSearch}
+                        >
+                            <svg className="search-icon" width="20" height="20">
+                                <use href={`${icons}#search`} />
+                            </svg>
+                        </button>
+                    ) : (
+                        ''
+                    )}
                 </div>
             </div>
         </header>

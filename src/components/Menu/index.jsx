@@ -8,14 +8,17 @@ import {
     updateProductsLimit,
     setProductsLimit,
     setFilters,
+    filterSelector,
 } from '../../store/slices/filterSlice';
 
-import { Categories, Product, Sort, Skeleton } from '../index';
+import { Categories, ProductBlock, Sort, Skeleton } from '../index';
+import { sortOptions } from '../Sort';
+import {
+    fetchProducts,
+    productsSelector,
+} from '../../store/slices/productsSlice';
 
 import './Menu.sass';
-import { SearchContext } from '../../App';
-import { sortOptions } from '../Sort';
-import { fetchProducts } from '../../store/slices/productsSlice';
 
 const Menu = () => {
     const dispatch = useDispatch();
@@ -24,13 +27,11 @@ const Menu = () => {
     const isParams = React.useRef(false);
     const isMounted = React.useRef(false);
 
-    const { categoryID, sort, productsLimit } = useSelector(
-        state => state.filter
-    );
+    const { categoryID, sort, productsLimit, searchValue } =
+        useSelector(filterSelector);
 
     const sortProperty = sort.sortProperty;
-    const { searchValue } = React.useContext(SearchContext);
-    const { items, status } = useSelector(state => state.products);
+    const { items, status } = useSelector(productsSelector);
 
     const onChangeCategory = id => {
         dispatch(setCategoryID(id));
@@ -91,13 +92,15 @@ const Menu = () => {
     }, [categoryID, sortProperty, productsLimit, searchValue]);
 
     const loadMore = () => {
-        if (items.length >= productsLimit) {
-            dispatch(updateProductsLimit());
-            dispatch(setProductsLimit);
-        }
+        dispatch(updateProductsLimit());
+        dispatch(setProductsLimit);
     };
 
-    const products = items.map(obj => <Product key={obj.id} {...obj} />);
+    const skeleton = productsLimit =>
+        [...new Array(productsLimit)].map((_, index) => (
+            <Skeleton key={index} />
+        ));
+    const products = items.map(obj => <ProductBlock key={obj.id} {...obj} />);
 
     return (
         <section id="menu" className="block menu">
@@ -125,9 +128,7 @@ const Menu = () => {
                         </div>
                         <div className="menu-products">
                             {status === 'loading'
-                                ? [...new Array(productsLimit)].map(
-                                      (_, index) => <Skeleton key={index} />
-                                  )
+                                ? skeleton(productsLimit)
                                 : products}
                         </div>
                         <div className="menu-showmore">

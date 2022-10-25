@@ -3,10 +3,7 @@
 @import './src/sass/functions'
 
 .top
-	//height: 100vh
-	//padding-top: toRem(190)
-	//background: url('../../assets/images/bg.jpg') no-repeat center center
-	//background-size: cover
+	height: 80vh
 	&-offer
 		@include flexCenter
 		justify-content: space-around
@@ -23,7 +20,9 @@
 			& span
 				color: #f5b44f
 		&__btn
+			display: inline-block
 			margin-top: toEm(30)
+			text-align: center
 		&__img
 			max-width: toRem(570)
 		&__features

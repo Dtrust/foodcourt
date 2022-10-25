@@ -1,0 +1,87 @@
+@import './src/sass/variables'
+@import './src/sass/mixins'
+@import './src/sass/functions'
+
+
+.cart
+	height: unset!important
+	padding-top: toRem(100)!important
+	padding-bottom: toRem(60)
+	&-content
+		max-width: toRem(980)!important
+	&-btn
+		&--clear
+			@include flexCenter
+			margin-bottom: toRem(40)
+			margin-right: 0
+			margin-left: auto
+			opacity: .5
+			transition: all .5s ease-in-out
+			&:hover
+				opacity: .9
+			& svg
+				margin-right: toRem(5)
+	&-list
+		padding-left: toRem(40)
+		padding-bottom: toRem(50)
+	&-total
+		@include flexCenter
+		justify-content: flex-end
+		position: relative
+		padding-top: toRem(25)
+		&::before
+			content: ''
+			position: absolute
+			top: 0
+			left: 0
+			display: block
+			width: 100%
+			height: 1px
+			margin: toRem(10) 0
+			background: #f5b44f
+		&__item
+			font-size: toRem(20)
+			& span
+				display: inline-block
+				margin-left: toRem(5)
+				font-weight: 700
+			&:not(:last-of-type)
+				margin-right: toRem(20)
+	&-actions
+		@include flexCenter
+		justify-content: space-between
+		margin-top: toRem(30)
+		&__btn
+			& svg
+				margin-right: toRem(5)
+			&.btn
+				&--checkout
+					font-weight: 700
+					text-transform: uppercase
+
+
+@media screen and (max-width: 768px)
+	.cart
+		display: block
+		padding-top: toRem(60)
+
+
+@media screen and (max-width: 480px)
+	.cart
+		&-list
+			padding-left: 0
+		&-total
+			flex-direction: column
+			&__item
+				&:not(:last-of-type)
+					margin-bottom: toRem(10)
+		&-actions
+			flex-direction: column
+			& .btn
+				&--checkout
+					margin-bottom: toRem(20)
+					padding: toRem(16) 20%
+				&--back
+					order: 1
+					padding: toRem(8) toRem(15)
+					opacity: .45

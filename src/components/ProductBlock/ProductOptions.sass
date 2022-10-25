@@ -1,0 +1,38 @@
+@import './src/sass/variables'
+@import './src/sass/mixins'
+@import './src/sass/functions'
+
+
+.product
+	&-options
+		padding: toRem(6)
+		border-radius: toRem(10)
+		background: #f5b44f
+		&__item
+			@include flexCenter
+			flex: 1
+			column-gap: toRem(10)
+			&:not(:last-of-type)
+				margin-bottom: toRem(5)
+		&__btn
+			flex: 1
+			padding: toRem(8)
+			font-weight: 600
+			line-height: 1.2
+			color: #111111
+			border-radius: toRem(10)
+			transition: all .3s ease-in-out
+			&:hover
+				color: #f3f3f3
+				outline: 1px solid #111111
+			&.active
+				color: #f3f3f3
+				background: #111111
+
+
+@media screen and (max-width: 768px)
+	.product
+		&-options
+			&__btn
+				padding: toRem(10) toRem(5)
+				font-size: toRem(20)

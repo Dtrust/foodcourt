@@ -1,0 +1,27 @@
+@import './src/sass/variables'
+@import './src/sass/mixins'
+@import './src/sass/functions'
+
+
+.product
+	&-count
+		@include flexCenter
+		justify-content: center
+		&__btn
+			width: toRem(30)
+			height: toRem(30)
+			border-radius: 50%
+			background: #ef1b03
+			& svg
+				& path
+					fill: #f3f3f3
+			&.btn--minus
+				& svg
+					& path
+						&:first-of-type
+							display: none
+		&__txt
+			display: inline-block
+			margin: 0 toRem(10)
+			font-size: toRem(20)
+			font-weight: 700

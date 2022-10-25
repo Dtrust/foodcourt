@@ -26,8 +26,15 @@
 				max-width: toRem(100)
 		&__info
 			flex: 0 0 calc(100% - 260px)
+			& > a
+				&:hover
+					color: #f5b44f
+		& .product
+			&-count
+				flex: 0 0 30%
 		&__title
 			font-weight: 600
+			transition: .3s ease-in-out
 			&::after
 				content: ''
 				display: block
@@ -37,7 +44,7 @@
 				background: #f5b44f
 		&__desc
 			margin-bottom: toRem(10)
-			//max-width: toRem(500)
+			max-width: 95%
 			font-size: toRem(12)
 			line-height: 1.2
 		&__btn
@@ -79,30 +86,6 @@
 		&__wrapper
 			@include flexCenter
 			flex: 1
-		&__count
-			flex: 0 0 30%
-			@include flexCenter
-			justify-content: center
-			& .cart
-				&-count
-					&__btn
-						width: toRem(30)
-						height: toRem(30)
-						border-radius: 50%
-						background: #ef1b03
-						& svg
-							& path
-								fill: #f3f3f3
-						&.btn--minus
-							& svg
-								& path
-									&:first-of-type
-										display: none
-					&__txt
-						display: inline-block
-						margin: 0 toRem(10)
-						font-size: toRem(20)
-						font-weight: 700
 		&__price
 			flex: 1
 			font-size: toRem(20)

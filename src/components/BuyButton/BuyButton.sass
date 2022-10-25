@@ -1,0 +1,43 @@
+@import './src/sass/variables'
+@import './src/sass/mixins'
+@import './src/sass/functions'
+
+
+.buy
+	&-btn
+		@include flexCenter
+		justify-content: center
+		position: relative
+		transition: all .3s ease-in-out
+		& span
+			font-weight: 700
+		&:hover
+			background: transparent
+			outline: 1px solid #ef1b03
+		&__icon
+			margin-right: toRem(5)
+		&__count
+			display: inline-flex
+			align-items: center
+			justify-content: center
+			position: absolute
+			right: toRem(19)
+			top: 50%
+			transform: translate(0, -50%)
+			width: 20px
+			height: 20px
+			padding: 3px
+			font-size: toRem(16)
+			font-weight: 700
+			color: #000
+			border-radius: 50%
+			background: #f5b44f
+			outline: 1px solid #000
+			transition: all .3s ease-in-out
+
+
+@media screen and (max-width: 768px)
+	.buy
+		&-btn
+			&.btn
+				font-size: toRem(24)

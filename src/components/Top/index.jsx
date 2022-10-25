@@ -1,3 +1,6 @@
+import React from 'react';
+import { HashLink } from 'react-router-hash-link';
+
 import './Top.sass';
 import image from '../../assets/images/top.png';
 
@@ -15,9 +18,14 @@ const Top = () => {
                             <br />
                             in&nbsp;our restaurant
                         </p>
-                        <button className="btn btn-solid top-offer__btn">
+                        <HashLink
+                            to={'/#menu'}
+                            smooth
+                            title={'Menu'}
+                            className="btn btn-solid top-offer__btn"
+                        >
                             <span>Menu</span>
-                        </button>
+                        </HashLink>
                         <ul className="top-offer__features features">
                             <li className="features-item">
                                 <p className="features-item__text">

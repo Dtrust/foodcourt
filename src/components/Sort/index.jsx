@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 
-import { setSort } from '../../store/slices/filterSlice';
+import { filterSelector, setSort } from '../../store/slices/filterSlice';
 
 import './Sort.sass';
 
@@ -17,7 +17,7 @@ export const sortOptions = [
 
 const Sort = () => {
     const dispatch = useDispatch();
-    const sort = useSelector(state => state.filter.sort);
+    const { sort } = useSelector(filterSelector);
 
     const sortRef = React.useRef();
 

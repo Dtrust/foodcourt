@@ -10,6 +10,17 @@
 	background: #454444
 	border-radius: toRem(40)
 	box-shadow: 0 6px 18px rgba(56, 56, 56, .75)
+	& > a
+		transition: .3s ease-in-out
+		&:hover
+			color: #f5b44f
+			& .product
+				&-img
+					& img
+						transform: rotate(360deg)
+				&-title
+					&::after
+						background: #f3f3f3
 	&-img
 		position: relative
 		min-height: toEm(152)
@@ -20,6 +31,7 @@
 			right: 0
 			margin: auto
 			max-width: toRem(260)
+			transition: .5s ease-in-out
 	&-title
 		font-size: toRem(20)
 		font-weight: 600
@@ -31,6 +43,7 @@
 			height: 1px
 			margin: toRem(10) 0
 			background: #f5b44f
+			transition: .3s ease-in-out
 	&-desc
 		//min-width: toRem(300)
 		min-height: toRem(90)
@@ -38,37 +51,15 @@
 		font-size: toRem(14)
 		text-align: center
 		line-height: 1.4
-	&-selector
-		margin: toRem(20) 0
-		padding: toRem(6)
-		border-radius: toRem(10)
-		background: #f5b44f
-		&__item
-			@include flexCenter
-			flex: 1
-			column-gap: toRem(10)
-			&:not(:last-of-type)
-				margin-bottom: toRem(5)
-		&__btn
-			flex: 1
-			padding: toRem(8)
-			font-weight: 600
-			line-height: 1.2
-			color: #111111
-			border-radius: toRem(10)
-			transition: all .3s ease-in-out
-			&:hover
-				color: #f3f3f3
-				outline: 1px solid #111111
-			&.active
-				color: #f3f3f3
-				background: #111111
+	& .product
+		&-options
+			margin: toRem(20) 0
 	&-bottom
 		margin: toRem(20) 0
 		&__wrap
 			position: relative
 			min-height: toRem(10)
-			& .product
+			& .buy
 				&-btn
 					@include flexCenter
 					justify-content: center
@@ -76,32 +67,6 @@
 					top: toRem(25)
 					left: 0
 					right: 0
-					transition: all .3s ease-in-out
-					& span
-						font-weight: 700
-					&:hover
-						background: transparent
-						outline: 1px solid #ef1b03
-					&__icon
-						margin-right: toRem(5)
-					&__count
-						display: inline-flex
-						align-items: center
-						justify-content: center
-						position: absolute
-						right: toRem(19)
-						top: 50%
-						transform: translate(0, -50%)
-						width: 20px
-						height: 20px
-						padding: 3px
-						font-size: toRem(16)
-						font-weight: 700
-						color: #000
-						border-radius: 50%
-						background: #f5b44f
-						outline: 1px solid #000
-						transition: all .3s ease-in-out
 	&-price
 		font-size: toRem(24)
 		font-weight: 700
@@ -116,13 +81,6 @@
 			font-size: toRem(24)
 		&-desc
 			font-size: toRem(16)
-		&-selector
-			&__btn
-				padding: toRem(10) toRem(5)
-				font-size: toRem(20)
-		&-btn
-			&.btn
-				font-size: toRem(24)
 
 
 @media screen and (max-width: 360px)

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import image from '../assets/images/error404.png';
+import './NotFound.sass';
+import image from '../../assets/images/error404.png';
 
 const NotFound = () => {
     return (

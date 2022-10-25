@@ -1,21 +1,22 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import debounce from 'lodash.debounce';
-
 import classNames from 'classnames';
+
+import { setSearchValue } from '../../store/slices/filterSlice';
 
 import './Search.sass';
 
 import icons from '../../assets/images/icons.svg';
-import { SearchContext } from '../../App';
 
 const Search = ({ isMobileSearchActive, cssClass, handleFocus }) => {
+    const dispatch = useDispatch();
     const [localValue, setLocalValue] = React.useState();
-    const { setSearchValue } = React.useContext(SearchContext);
 
     const updateSearchValue = React.useCallback(
         debounce(str => {
-            setSearchValue(str);
-            window.location.href = '/#menu';
+            // window.location.href = '/#menu';
+            dispatch(setSearchValue(str));
         }, 750),
         []
     );
