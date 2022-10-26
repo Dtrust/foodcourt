@@ -11,7 +11,7 @@ import {
     filterSelector,
 } from '../../store/slices/filterSlice';
 
-import { Categories, ProductBlock, Sort, Skeleton } from '../index';
+import { Categories, ProductBlock, Sort, Skeleton, Search } from '../index';
 import { sortOptions } from '../Sort';
 import {
     fetchProducts,
@@ -33,7 +33,7 @@ const Menu = () => {
     const sortProperty = sort.sortProperty;
     const { items, status } = useSelector(productsSelector);
 
-    const onChangeCategory = id => {
+    const onChangeCategory = (id: string) => {
         dispatch(setCategoryID(id));
     };
 
@@ -65,6 +65,7 @@ const Menu = () => {
     React.useEffect(() => {
         if (!isParams.current) {
             dispatch(
+                // @ts-ignore
                 fetchProducts({
                     category,
                     order,
@@ -96,11 +97,13 @@ const Menu = () => {
         dispatch(setProductsLimit);
     };
 
-    const skeleton = productsLimit =>
+    const skeleton = (productsLimit: number) =>
         [...new Array(productsLimit)].map((_, index) => (
             <Skeleton key={index} />
         ));
-    const products = items.map(obj => <ProductBlock key={obj.id} {...obj} />);
+    const products = items.map((obj: any) => (
+        <ProductBlock key={obj.id} {...obj} />
+    ));
 
     return (
         <section id="menu" className="block menu">
@@ -123,8 +126,11 @@ const Menu = () => {
                                 onChangeCategory={onChangeCategory}
                             />
                         </div>
-                        <div className="menu-sort">
-                            <Sort />
+                        <div className="menu-wrap">
+                            <div className="menu-sort">
+                                <Sort />
+                            </div>
+                            <Search />
                         </div>
                         <div className="menu-products">
                             {status === 'loading'

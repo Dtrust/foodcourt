@@ -2,7 +2,13 @@ import React from 'react';
 
 import './ProductCount.sass';
 
-const ProductCount = props => {
+type ProductCountProps = {
+    cartItemCount: number;
+    decProduct: any;
+    incProduct: any;
+};
+
+const ProductCount: React.FC<ProductCountProps> = props => {
     const { cartItemCount, decProduct, incProduct } = props;
 
     return (

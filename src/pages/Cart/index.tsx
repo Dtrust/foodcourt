@@ -6,7 +6,7 @@ import { cartSelector, clearCart } from '../../store/slices/cartSlice';
 
 import './Cart.sass';
 
-const Cart = () => {
+const Cart: React.FC = () => {
     const dispatch = useDispatch();
     const { items, totalPrice, totalCount } = useSelector(cartSelector);
 
@@ -67,7 +67,7 @@ const Cart = () => {
                     <span>Empty cart</span>
                 </button>
                 <div className="cart-list">
-                    {items.map(item => (
+                    {items.map((item: any) => (
                         <CartItem key={item.id} {...item} />
                     ))}
                 </div>

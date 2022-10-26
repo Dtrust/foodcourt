@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import classNames from 'classnames';
 
 import { buyNow, cartItemSelectorByID } from '../../store/slices/cartSlice';
 
@@ -10,7 +9,17 @@ import ProductOptions from './ProductOptions';
 import './ProductBlock.sass';
 import { BuyButton } from './../index';
 
-const ProductBlock = props => {
+type ProductBlockProps = {
+    id: string;
+    name: string;
+    price: number;
+    ing: string;
+    imageUrl: string;
+    types: any;
+    sizes: [];
+};
+
+const ProductBlock: React.FC<ProductBlockProps> = props => {
     const dispatch = useDispatch();
     const { id, name, price, ing, imageUrl, types, sizes } = props;
 

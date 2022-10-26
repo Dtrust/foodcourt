@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 import { Footer, Header, Location } from '../components';
 
-const MainLayout = () => {
+const MainLayout: React.FC = () => {
     return (
         <>
             <Header />

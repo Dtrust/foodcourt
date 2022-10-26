@@ -6,7 +6,12 @@ import { filterSelector, setSort } from '../../store/slices/filterSlice';
 
 import './Sort.sass';
 
-export const sortOptions = [
+type SortItem = {
+    name: string;
+    sortProperty: string;
+};
+
+export const sortOptions: SortItem[] = [
     { name: 'Popularity ↑', sortProperty: '-rating' },
     { name: 'Popularity ↓', sortProperty: 'rating' },
     { name: 'Price ↑', sortProperty: '-price' },
@@ -15,21 +20,21 @@ export const sortOptions = [
     { name: 'Name ↓', sortProperty: 'name' },
 ];
 
-const Sort = () => {
+const Sort: React.FC = () => {
     const dispatch = useDispatch();
     const { sort } = useSelector(filterSelector);
 
-    const sortRef = React.useRef();
+    const sortRef = React.useRef<HTMLDivElement>(null);
 
     const [openSort, setOpenSort] = React.useState(false);
 
-    const onSelectOption = obj => {
+    const onSelectOption = (obj: SortItem) => {
         dispatch(setSort(obj));
         setOpenSort(false);
     };
 
     React.useEffect(() => {
-        const handleClickOutsideSort = e => {
+        const handleClickOutsideSort = (e: any) => {
             if (!e.path.includes(sortRef.current)) {
                 setOpenSort(false);
             }

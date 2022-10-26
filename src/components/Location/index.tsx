@@ -24,13 +24,13 @@ const Location = () => {
 
     const [map, setMap] = React.useState(null);
 
-    const onLoad = React.useCallback(map => {
+    const onLoad = React.useCallback((map: any) => {
         const bounds = new window.google.maps.LatLngBounds(center);
         map.fitBounds(bounds);
         setMap(map);
     }, []);
 
-    const onUnmount = React.useCallback(map => {
+    const onUnmount = React.useCallback(() => {
         setMap(null);
     }, []);
 
@@ -41,7 +41,7 @@ const Location = () => {
                     <GoogleMap
                         mapContainerStyle={containerStyle}
                         center={center}
-                        zoom={13}
+                        zoom={33}
                         onLoad={onLoad}
                         onUnmount={onUnmount}
                     >

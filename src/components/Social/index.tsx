@@ -1,9 +1,17 @@
+import React from 'react';
+
 import icons from '../../assets/images/icons.svg';
 
 import './Social.sass';
 
-const Social = () => {
-    const socialItems = [
+type SocialItem = {
+    id: number;
+    name: string;
+    link: string;
+};
+
+const Social: React.FC = () => {
+    const socialItems: SocialItem[] = [
         { id: 0, name: 'facebook', link: '#' },
         { id: 1, name: 'instagram', link: '#' },
         { id: 2, name: 'viber', link: '#' },

@@ -3,7 +3,14 @@ import classNames from 'classnames';
 
 import './BuyButton.sass';
 
-const BuyButton = props => {
+type BuyButtonProps = {
+    addItemToCart: any;
+    cartItemCount: number;
+    btnText: string;
+    cssClass?: string;
+};
+
+const BuyButton: React.FC<BuyButtonProps> = props => {
     const { addItemToCart, cartItemCount, btnText, cssClass } = props;
 
     return (

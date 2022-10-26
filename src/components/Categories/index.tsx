@@ -3,7 +3,15 @@ import classNames from 'classnames';
 
 import './Categories.sass';
 
-const Categories = ({ categoryID, onChangeCategory }) => {
+type CategoriesProps = {
+    categoryID: number;
+    onChangeCategory: any;
+};
+
+const Categories: React.FC<CategoriesProps> = ({
+    categoryID,
+    onChangeCategory,
+}) => {
     const categories = [
         { id: 0, name: 'All' },
         { id: 1, name: 'Meat' },

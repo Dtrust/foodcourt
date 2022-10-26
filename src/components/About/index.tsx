@@ -1,6 +1,7 @@
+import React from 'react';
 import './About.sass';
 
-const About = () => {
+const About: React.FC = () => {
     return (
         <section id="about" className="block about">
             <div className="container about-content">

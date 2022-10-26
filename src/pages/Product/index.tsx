@@ -6,13 +6,20 @@ import { BuyButton, ProductOptions } from '../../components';
 import './Product.sass';
 import { useDispatch, useSelector } from 'react-redux';
 import { buyNow, cartItemSelectorByID } from '../../store/slices/cartSlice';
-import classNames from 'classnames';
 
 const { REACT_APP_DB } = process.env;
 
-const Product = () => {
-    const [product, setProduct] = React.useState();
-    const [activeType, setActiveType] = React.useState(0);
+const Product: React.FC = () => {
+    const [product, setProduct] = React.useState<{
+        id: string;
+        name: string;
+        price: number;
+        ing: string;
+        imageUrl: string;
+        types: any;
+        sizes: [];
+    }>();
+    const [activeType, setActiveType] = React.useState<number>(0);
     const [activeSize, setActiveSize] = React.useState(0);
 
     const navigate = useNavigate();
@@ -22,19 +29,6 @@ const Product = () => {
 
     const cartItem = useSelector(cartItemSelectorByID(id));
     const cartItemCount = cartItem ? cartItem.count : 0;
-
-    const addItemToCart = () => {
-        const item = {
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            ing: product.ing,
-            imageUrl: product.imageUrl,
-            type: product.types[activeType].typeName,
-            size: product.sizes[activeSize],
-        };
-        dispatch(buyNow(item));
-    };
 
     React.useEffect(() => {
         window.scrollTo(0, 0);
@@ -48,11 +42,24 @@ const Product = () => {
             }
         }
         fetchProduct();
-    }, []);
+    }, [id, navigate]);
 
     if (!product) {
-        return 'Loading...';
+        return <>'Loading...'</>;
     }
+
+    const addItemToCart = () => {
+        const item = {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            ing: product.ing,
+            imageUrl: product.imageUrl,
+            type: product.types[activeType].typeName,
+            size: product.sizes[activeSize],
+        };
+        dispatch(buyNow(item));
+    };
 
     return (
         <section className="block-top product-page">

@@ -3,7 +3,16 @@ import classNames from 'classnames';
 
 import './ProductOptions.sass';
 
-const ProductOptions = props => {
+type ProductOptionsProps = {
+    types: [];
+    sizes: [];
+    activeSize: number;
+    setActiveSize: any;
+    activeType: number;
+    setActiveType: any;
+};
+
+const ProductOptions: React.FC<ProductOptionsProps> = props => {
     const {
         types,
         sizes,

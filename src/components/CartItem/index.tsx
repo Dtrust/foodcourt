@@ -6,7 +6,27 @@ import { buyNow, decItem, removeItem } from '../../store/slices/cartSlice';
 import ProductCount from '../ProductBlock/ProductCount';
 import './CartItem.sass';
 
-const CartItem = ({ id, name, price, ing, imageUrl, count, type, size }) => {
+type CartItemProps = {
+    id: string;
+    name: string;
+    price: number;
+    ing: string;
+    imageUrl: string;
+    count: number;
+    type: string;
+    size: number;
+};
+
+const CartItem: React.FC<CartItemProps> = ({
+    id,
+    name,
+    price,
+    ing,
+    imageUrl,
+    count,
+    type,
+    size,
+}) => {
     const dispatch = useDispatch();
 
     const incProduct = () => {

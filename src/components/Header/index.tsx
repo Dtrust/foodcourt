@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { HashLink } from 'react-router-hash-link';
 import classNames from 'classnames';
 
-import { Search } from '../../components';
 import { cartSelector } from '../../store/slices/cartSlice';
 
 import './Header.sass';
@@ -12,7 +11,7 @@ import './Header.sass';
 import { ReactComponent as Logo } from '../../assets/images/logo.svg';
 import icons from '../../assets/images/icons.svg';
 
-const Header = ({ searchValue, setSearchValue }) => {
+const Header: React.FC = () => {
     const location = useLocation();
 
     const menuItems = [
@@ -25,9 +24,6 @@ const Header = ({ searchValue, setSearchValue }) => {
     const { totalPrice, totalCount } = useSelector(cartSelector);
 
     const phoneNumber = '+38 (050) 111 22 33';
-
-    const [isMobileSearchActive, setIsMobileSearchActive] =
-        React.useState(false);
 
     const [scroll, setScroll] = React.useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
@@ -55,22 +51,7 @@ const Header = ({ searchValue, setSearchValue }) => {
         }
     };
 
-    const mobileSearchFocus = React.useRef(null);
-
-    const handleMobileSearch = () => {
-        mobileSearchFocus.current.focus();
-        setIsMobileSearchActive(!isMobileSearchActive);
-    };
-
-    const isCartPage = () => {
-        if (location.pathname === '/cart') {
-            return true;
-        } else {
-            return false;
-        }
-    };
-
-    const isNavLinkActive = anchor => {
+    const isNavLinkActive = (anchor: string) => {
         if (location.hash === anchor) {
             return true;
         } else {
@@ -130,17 +111,6 @@ const Header = ({ searchValue, setSearchValue }) => {
                         </ul>
                     </nav>
                 </div>
-                {!isCartPage() ? (
-                    <Search
-                        isMobileSearchActive={isMobileSearchActive}
-                        cssClass={'header-search'}
-                        handleFocus={mobileSearchFocus}
-                        searchValue={searchValue}
-                        setSearchValue={setSearchValue}
-                    />
-                ) : (
-                    ''
-                )}
                 <div className="header-wrap">
                     {location.pathname !== '/cart' ? (
                         <div className="header-cart">
@@ -200,18 +170,6 @@ const Header = ({ searchValue, setSearchValue }) => {
                             <span className="visually-hidden">Callback</span>
                         </button>
                     </div>
-                    {!isCartPage() ? (
-                        <button
-                            className="header-search__btn"
-                            onClick={handleMobileSearch}
-                        >
-                            <svg className="search-icon" width="20" height="20">
-                                <use href={`${icons}#search`} />
-                            </svg>
-                        </button>
-                    ) : (
-                        ''
-                    )}
                 </div>
             </div>
         </header>
