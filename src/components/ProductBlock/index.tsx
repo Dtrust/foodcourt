@@ -2,12 +2,14 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { buyNow, cartItemSelectorByID } from '../../store/slices/cartSlice';
-
 import ProductOptions from './ProductOptions';
+import { BuyButton } from './../index';
+
+import { selectCartItemByID } from '../../store/cart/selectors';
+import { CartItemType } from '../../store/cart/types';
+import { buyNow } from '../../store/cart/slice';
 
 import './ProductBlock.sass';
-import { BuyButton } from './../index';
 
 type ProductBlockProps = {
     id: string;
@@ -15,7 +17,7 @@ type ProductBlockProps = {
     price: number;
     ing: string;
     imageUrl: string;
-    types: any;
+    types: [{ id: number; typeName: string }];
     sizes: [];
 };
 
@@ -26,18 +28,19 @@ const ProductBlock: React.FC<ProductBlockProps> = props => {
     const [activeType, setActiveType] = React.useState(0);
     const [activeSize, setActiveSize] = React.useState(0);
 
-    const cartItem = useSelector(cartItemSelectorByID(id));
+    const cartItem = useSelector(selectCartItemByID(id));
     const cartItemCount = cartItem ? cartItem.count : 0;
 
     const addItemToCart = () => {
-        const item = {
+        const item: CartItemType = {
             id,
             name,
             price,
             ing,
             imageUrl,
-            type: types[activeType].typeName,
+            types: types[activeType].typeName,
             size: sizes[activeSize],
+            count: 0,
         };
 
         dispatch(buyNow(item));

@@ -1,16 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {
-    totalPrice: 0,
-    totalCount: 0,
-    items: [],
+import { getLocalStorageCart } from '../../utils/getLocalStorageCart';
+import { CartItemType, CartSliceState } from './types';
+import { calcCartTotalPrice } from '../../utils/calcCartTotal';
+
+const { items, totalPrice, totalCount } = getLocalStorageCart();
+
+const initialState: CartSliceState = {
+    totalCount,
+    totalPrice,
+    items,
 };
 
 export const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        buyNow(state, action) {
+        buyNow(state, action: PayloadAction<CartItemType>) {
             const isItemAdded = state.items.find(
                 obj => obj.id === action.payload.id
             );
@@ -26,25 +32,22 @@ export const cartSlice = createSlice({
 
             state.totalCount++;
 
-            state.totalPrice = state.items.reduce((sum, obj) => {
-                return obj.price * obj.count + sum;
-            }, 0);
+            state.totalPrice = calcCartTotalPrice(state.items);
         },
-        decItem(state, action) {
+        decItem(state, action: PayloadAction<string>) {
             const item = state.items.find(obj => obj.id === action.payload);
-            if (item && item.count > 0) {
+            if (item && item.count > 1) {
                 item.count--;
                 state.totalCount--;
-                state.totalPrice = state.totalPrice - item.price;
+                state.totalPrice = calcCartTotalPrice(state.items);
             }
         },
-        removeItem(state, action) {
+        removeItem(state, action: PayloadAction<string>) {
             state.items = state.items.filter(obj => obj.id !== action.payload);
             if (state.items.length === 0) {
                 state.items = [];
                 state.totalPrice = 0;
                 state.totalCount = 0;
-                console.log(state.items.length);
             }
         },
         clearCart(state) {
@@ -54,11 +57,6 @@ export const cartSlice = createSlice({
         },
     },
 });
-
-export const cartSelector = state => state.cart;
-
-export const cartItemSelectorByID = id => state =>
-    state.cart.items.find(obj => obj.id === id);
 
 export const { buyNow, removeItem, decItem, clearCart } = cartSlice.actions;
 

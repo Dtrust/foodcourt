@@ -3,31 +3,27 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { BuyButton, ProductOptions } from '../../components';
 
+import { useSelector } from 'react-redux';
+
+import { useAPPDispatch } from '../../store/store';
+import { CartItemType } from '../../store/cart/types';
+import { selectCartItemByID } from '../../store/cart/selectors';
+import { buyNow } from '../../store/cart/slice';
+
 import './Product.sass';
-import { useDispatch, useSelector } from 'react-redux';
-import { buyNow, cartItemSelectorByID } from '../../store/slices/cartSlice';
 
 const { REACT_APP_DB } = process.env;
 
 const Product: React.FC = () => {
-    const [product, setProduct] = React.useState<{
-        id: string;
-        name: string;
-        price: number;
-        ing: string;
-        imageUrl: string;
-        types: any;
-        sizes: [];
-    }>();
+    const [product, setProduct] = React.useState<CartItemType>();
     const [activeType, setActiveType] = React.useState<number>(0);
     const [activeSize, setActiveSize] = React.useState(0);
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useAPPDispatch();
 
     const { id } = useParams();
-
-    const cartItem = useSelector(cartItemSelectorByID(id));
+    const cartItem = useSelector(selectCartItemByID(String(id)));
     const cartItemCount = cartItem ? cartItem.count : 0;
 
     React.useEffect(() => {
@@ -49,14 +45,14 @@ const Product: React.FC = () => {
     }
 
     const addItemToCart = () => {
-        const item = {
+        const item: CartItemType = {
             id: product.id,
             name: product.name,
             price: product.price,
             ing: product.ing,
             imageUrl: product.imageUrl,
-            type: product.types[activeType].typeName,
-            size: product.sizes[activeSize],
+            types: product.types[activeType].typeName,
+            sizes: product.sizes[activeSize],
         };
         dispatch(buyNow(item));
     };

@@ -1,28 +1,35 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import classNames from 'classnames';
 
-import { filterSelector, setSort } from '../../store/slices/filterSlice';
-
 import './Sort.sass';
+import { SortProperties, SortPropertiesEnum } from '../../store/filter/types';
+import { setSort } from '../../store/filter/slice';
 
 type SortItem = {
     name: string;
-    sortProperty: string;
+    sortProperty: SortPropertiesEnum;
+};
+
+type SortProps = {
+    value: SortProperties;
+};
+
+type ClickOutside = MouseEvent & {
+    path: Node[];
 };
 
 export const sortOptions: SortItem[] = [
-    { name: 'Popularity ↑', sortProperty: '-rating' },
-    { name: 'Popularity ↓', sortProperty: 'rating' },
-    { name: 'Price ↑', sortProperty: '-price' },
-    { name: 'Price ↓', sortProperty: 'price' },
-    { name: 'Name ↑', sortProperty: '-name' },
-    { name: 'Name ↓', sortProperty: 'name' },
+    { name: 'Popularity ↑', sortProperty: SortPropertiesEnum.RATING_ASC },
+    { name: 'Popularity ↓', sortProperty: SortPropertiesEnum.RATING_DESC },
+    { name: 'Price ↑', sortProperty: SortPropertiesEnum.PRICE_ASC },
+    { name: 'Price ↓', sortProperty: SortPropertiesEnum.PRICE_DESC },
+    { name: 'Name ↑', sortProperty: SortPropertiesEnum.NAME_ASC },
+    { name: 'Name ↓', sortProperty: SortPropertiesEnum.NAME_DESC },
 ];
 
-const Sort: React.FC = () => {
+const Sort: React.FC<SortProps> = React.memo(({ value }) => {
     const dispatch = useDispatch();
-    const { sort } = useSelector(filterSelector);
 
     const sortRef = React.useRef<HTMLDivElement>(null);
 
@@ -34,8 +41,10 @@ const Sort: React.FC = () => {
     };
 
     React.useEffect(() => {
-        const handleClickOutsideSort = (e: any) => {
-            if (!e.path.includes(sortRef.current)) {
+        const handleClickOutsideSort = (event: MouseEvent) => {
+            const _event = event as ClickOutside;
+
+            if (sortRef.current && !_event.path.includes(sortRef.current)) {
                 setOpenSort(false);
             }
         };
@@ -68,7 +77,7 @@ const Sort: React.FC = () => {
                     onClick={() => setOpenSort(!openSort)}
                     className="sort-label__btn"
                 >
-                    {sort.name}
+                    {value.name}
                 </button>
             </div>
             {openSort && (
@@ -80,7 +89,7 @@ const Sort: React.FC = () => {
                                 onClick={() => onSelectOption(obj)}
                                 className={classNames(
                                     'sort-popup__item',
-                                    sort.sortProperty === obj.sortProperty
+                                    value.sortProperty === obj.sortProperty
                                         ? 'active'
                                         : ''
                                 )}
@@ -93,6 +102,6 @@ const Sort: React.FC = () => {
             )}
         </div>
     );
-};
+});
 
 export default Sort;

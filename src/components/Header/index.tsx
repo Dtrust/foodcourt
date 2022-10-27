@@ -4,35 +4,45 @@ import { useSelector } from 'react-redux';
 import { HashLink } from 'react-router-hash-link';
 import classNames from 'classnames';
 
-import { cartSelector } from '../../store/slices/cartSlice';
+import { selectCart } from '../../store/cart/selectors';
 
 import './Header.sass';
-
 import { ReactComponent as Logo } from '../../assets/images/logo.svg';
 import icons from '../../assets/images/icons.svg';
+
+const menuItems = [
+    { id: 0, name: 'Menu', link: '#menu' },
+    { id: 1, name: 'About', link: '#about' },
+    // { id: 2, name: 'FeedBacks', link: '#feedbacks' },
+    { id: 3, name: 'Contacts', link: '#contacts' },
+];
+
+const phoneNumber = '+38 (050) 111 22 33';
 
 const Header: React.FC = () => {
     const location = useLocation();
 
-    const menuItems = [
-        { id: 0, name: 'Menu', link: '#menu' },
-        { id: 1, name: 'About', link: '#about' },
-        // { id: 2, name: 'FeedBacks', link: '#feedbacks' },
-        { id: 3, name: 'Contacts', link: '#contacts' },
-    ];
-
-    const { totalPrice, totalCount } = useSelector(cartSelector);
-
-    const phoneNumber = '+38 (050) 111 22 33';
+    const { items, totalPrice, totalCount } = useSelector(selectCart);
 
     const [scroll, setScroll] = React.useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+    const isMounted = React.useRef(false);
+
+    // const totalCount = items.reduce((sum: number, item) => sum + item.count, 0);
 
     React.useEffect(() => {
         window.addEventListener('scroll', () => {
             setScroll(window.scrollY > 50);
         });
     }, []);
+
+    React.useEffect(() => {
+        if (isMounted.current) {
+            const json = JSON.stringify(items);
+            localStorage.setItem('foodCourt-cart', json);
+        }
+        isMounted.current = true;
+    }, [totalPrice, totalCount, items]);
 
     const openMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -132,9 +142,11 @@ const Header: React.FC = () => {
                                 >
                                     <use href={`${icons}#cart`} />
                                 </svg>
-                                <span className="informer-count">
-                                    {totalCount}
-                                </span>
+                                {totalCount > 0 && (
+                                    <span className="informer-count">
+                                        {totalCount}
+                                    </span>
+                                )}
                             </Link>
                         </div>
                     ) : (

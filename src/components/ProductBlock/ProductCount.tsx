@@ -14,6 +14,7 @@ const ProductCount: React.FC<ProductCountProps> = props => {
     return (
         <div className="product-count">
             <button
+                disabled={cartItemCount === 1}
                 onClick={decProduct}
                 className="product-count__btn btn--minus"
             >
