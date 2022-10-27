@@ -4,13 +4,18 @@ export enum StatusEnum {
     ERROR = 'Error',
 }
 
-export type Product = {
+export type ProductOptionsType = {
+    id: number;
+    typeName: string;
+};
+
+export type ProductItemType = {
     id: string;
     name: string;
     price: number;
     ing: string;
     imageUrl: string;
-    types: [{ id: string; typeName: string }];
+    types: ProductOptionsType[];
     sizes: number[];
     rating: number;
 };
@@ -24,6 +29,6 @@ export type SearchProductParams = {
 };
 
 export interface ProductsSliceState {
-    items: Product[];
+    items: ProductItemType[];
     status: StatusEnum;
 }

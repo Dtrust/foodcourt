@@ -38,7 +38,7 @@ const ProductBlock: React.FC<ProductBlockProps> = props => {
             price,
             ing,
             imageUrl,
-            types: types[activeType].typeName,
+            type: types[activeType].typeName,
             size: sizes[activeSize],
             count: 0,
         };

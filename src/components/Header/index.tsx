@@ -161,8 +161,8 @@ const Header: React.FC = () => {
                         >
                             <svg
                                 className={'header-phone__icon'}
-                                width="20"
-                                height="20"
+                                width="15"
+                                height="15"
                             >
                                 <use href={`${icons}#phone`} />
                             </svg>

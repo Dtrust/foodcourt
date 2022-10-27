@@ -2,10 +2,11 @@ import React from 'react';
 import classNames from 'classnames';
 
 import './ProductOptions.sass';
+import { ProductOptionsType } from '../../store/product/types';
 
 type ProductOptionsProps = {
-    types: [];
-    sizes: [];
+    types: ProductOptionsType[];
+    sizes: number[];
     activeSize: number;
     setActiveSize: any;
     activeType: number;

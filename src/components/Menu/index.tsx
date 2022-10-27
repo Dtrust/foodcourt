@@ -1,10 +1,10 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import qs from 'qs';
+// import qs from 'qs';
 
 import { Categories, ProductBlock, Sort, Skeleton, Search } from '../index';
-import { sortOptions } from '../Sort';
+// import { sortOptions } from '../Sort';
 
 import { useAPPDispatch } from '../../store/store';
 import { selectFilter } from '../../store/filter/selectors';
@@ -14,17 +14,17 @@ import {
     updateProductsLimit,
     setProductsLimit,
 } from '../../store/filter/slice';
-import { fetchProducts } from '../../store/product/slice';
+import { fetchProducts } from '../../store/product/actions';
 import { StatusEnum } from '../../store/product/types';
 
 import './Menu.sass';
 
 const Menu = () => {
     const dispatch = useAPPDispatch();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const isParams = React.useRef(false);
-    const isMounted = React.useRef(false);
+    // const isMounted = React.useRef(false);
 
     const { categoryID, sort, productsLimit, searchValue } =
         useSelector(selectFilter);
@@ -32,9 +32,12 @@ const Menu = () => {
     const sortProperty = sort.sortProperty;
     const { items, status } = useSelector(selectProduct);
 
-    const onChangeCategory = React.useCallback((id: number) => {
-        dispatch(setCategoryID(id));
-    }, []);
+    const onChangeCategory = React.useCallback(
+        (id: number) => {
+            dispatch(setCategoryID(id));
+        },
+        [dispatch]
+    );
 
     const category = categoryID > 0 ? `category=${categoryID}` : '';
     const order = sortProperty.includes('-') ? 'asc' : 'desc';
@@ -81,7 +84,17 @@ const Menu = () => {
         }
 
         isParams.current = false;
-    }, [categoryID, sortProperty, productsLimit, searchValue]);
+    }, [
+        categoryID,
+        sortProperty,
+        productsLimit,
+        searchValue,
+        category,
+        dispatch,
+        order,
+        search,
+        sortBy,
+    ]);
 
     // React.useEffect(() => {
     //     if (isMounted.current) {

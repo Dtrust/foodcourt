@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { Product, ProductsSliceState, StatusEnum } from './types';
+import { ProductItemType, ProductsSliceState, StatusEnum } from './types';
 import { fetchProducts } from './actions';
 
 const initialState: ProductsSliceState = {
@@ -12,7 +12,7 @@ const productSlice = createSlice({
     name: 'products',
     initialState,
     reducers: {
-        setItems(state, action: PayloadAction<Product[]>) {
+        setItems(state, action: PayloadAction<ProductItemType[]>) {
             state.items = action.payload;
         },
     },
@@ -23,7 +23,7 @@ const productSlice = createSlice({
         });
         builder.addCase(
             fetchProducts.fulfilled,
-            (state, action: PayloadAction<Product[]>) => {
+            (state, action: PayloadAction<ProductItemType[]>) => {
                 state.items = action.payload;
                 state.status = StatusEnum.SUCCESS;
             }

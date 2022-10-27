@@ -11,11 +11,12 @@ import { selectCartItemByID } from '../../store/cart/selectors';
 import { buyNow } from '../../store/cart/slice';
 
 import './Product.sass';
+import { ProductItemType } from '../../store/product/types';
 
 const { REACT_APP_DB } = process.env;
 
 const Product: React.FC = () => {
-    const [product, setProduct] = React.useState<CartItemType>();
+    const [product, setProduct] = React.useState<ProductItemType>();
     const [activeType, setActiveType] = React.useState<number>(0);
     const [activeSize, setActiveSize] = React.useState(0);
 
@@ -51,8 +52,9 @@ const Product: React.FC = () => {
             price: product.price,
             ing: product.ing,
             imageUrl: product.imageUrl,
-            types: product.types[activeType].typeName,
-            sizes: product.sizes[activeSize],
+            type: product.types[activeType].typeName,
+            size: product.sizes[activeSize],
+            count: 0,
         };
         dispatch(buyNow(item));
     };
