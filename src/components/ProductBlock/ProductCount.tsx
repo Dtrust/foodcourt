@@ -8,7 +8,7 @@ type ProductCountProps = {
     incProduct: any;
 };
 
-const ProductCount: React.FC<ProductCountProps> = props => {
+export const ProductCount: React.FC<ProductCountProps> = props => {
     const { cartItemCount, decProduct, incProduct } = props;
 
     return (
@@ -48,5 +48,3 @@ const ProductCount: React.FC<ProductCountProps> = props => {
         </div>
     );
 };
-
-export default ProductCount;

@@ -16,7 +16,7 @@ const center = {
 
 const { REACT_APP_LOC } = process.env;
 
-const Location = () => {
+export const Location = () => {
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: `${REACT_APP_LOC}`,
@@ -85,5 +85,3 @@ const Location = () => {
         </section>
     );
 };
-
-export default Location;

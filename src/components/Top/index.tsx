@@ -4,7 +4,7 @@ import { HashLink } from 'react-router-hash-link';
 import './Top.sass';
 import image from '../../assets/images/top.png';
 
-const Top: React.FC = () => {
+export const Top: React.FC = () => {
     return (
         <section className="block-top top">
             <h1 className="visually-hidden">Pizza delivery service</h1>
@@ -55,5 +55,3 @@ const Top: React.FC = () => {
         </section>
     );
 };
-
-export default Top;

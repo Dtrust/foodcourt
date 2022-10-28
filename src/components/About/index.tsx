@@ -1,7 +1,7 @@
 import React from 'react';
 import './About.sass';
 
-const About: React.FC = () => {
+export const About: React.FC = () => {
     return (
         <section id="about" className="block about">
             <div className="container about-content">
@@ -59,5 +59,3 @@ const About: React.FC = () => {
         </section>
     );
 };
-
-export default About;

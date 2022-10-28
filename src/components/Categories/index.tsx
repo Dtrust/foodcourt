@@ -8,7 +8,7 @@ type CategoriesProps = {
     onChangeCategory: (index: number) => void;
 };
 
-const categories = [
+const categoriesList = [
     { id: 0, name: 'All' },
     { id: 1, name: 'Meat' },
     { id: 2, name: 'Vegetarians' },
@@ -17,11 +17,11 @@ const categories = [
     { id: 5, name: 'Closed' },
 ];
 
-const Categories: React.FC<CategoriesProps> = React.memo(
+export const Categories: React.FC<CategoriesProps> = React.memo(
     ({ categoryID, onChangeCategory }) => {
         return (
             <ul className="categories-list">
-                {categories.map(({ id, name }, index) => (
+                {categoriesList.map(({ id, name }, index) => (
                     <li key={id} className="categories-item">
                         <button
                             onClick={() => onChangeCategory(index)}
@@ -39,5 +39,3 @@ const Categories: React.FC<CategoriesProps> = React.memo(
         );
     }
 );
-
-export default Categories;

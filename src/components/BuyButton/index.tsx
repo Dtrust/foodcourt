@@ -10,7 +10,7 @@ type BuyButtonProps = {
     cssClass?: string;
 };
 
-const BuyButton: React.FC<BuyButtonProps> = props => {
+export const BuyButton: React.FC<BuyButtonProps> = props => {
     const { addItemToCart, cartItemCount, btnText, cssClass } = props;
 
     return (
@@ -33,5 +33,3 @@ const BuyButton: React.FC<BuyButtonProps> = props => {
         </button>
     );
 };
-
-export default BuyButton;

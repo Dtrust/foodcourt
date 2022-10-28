@@ -10,14 +10,14 @@ type SocialItem = {
     link: string;
 };
 
-const Social: React.FC = () => {
-    const socialItems: SocialItem[] = [
-        { id: 0, name: 'facebook', link: '#' },
-        { id: 1, name: 'instagram', link: '#' },
-        { id: 2, name: 'viber', link: '#' },
-        { id: 3, name: 'telegram', link: '#' },
-    ];
+const socialItems: SocialItem[] = [
+    { id: 0, name: 'facebook', link: '#' },
+    { id: 1, name: 'instagram', link: '#' },
+    { id: 2, name: 'viber', link: '#' },
+    { id: 3, name: 'telegram', link: '#' },
+];
 
+export const Social: React.FC = () => {
     return (
         <ul className="social">
             {socialItems.map(({ id, name, link }) => (
@@ -37,5 +37,3 @@ const Social: React.FC = () => {
         </ul>
     );
 };
-
-export default Social;

@@ -2,12 +2,11 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import ProductCount from '../ProductBlock/ProductCount';
+import { ProductCount } from '../ProductBlock/ProductCount';
 
-import { buyNow, decItem, removeItem } from '../../store/cart/slice';
+import { incItem, decItem, removeItem } from '../../store/cart/slice';
 
 import './CartItem.sass';
-import { CartItemType } from '../../store/cart/types';
 
 type CartItemProps = {
     id: string;
@@ -20,7 +19,7 @@ type CartItemProps = {
     size: number;
 };
 
-const CartItem: React.FC<CartItemProps> = ({
+export const CartItem: React.FC<CartItemProps> = ({
     id,
     name,
     price,
@@ -33,7 +32,7 @@ const CartItem: React.FC<CartItemProps> = ({
     const dispatch = useDispatch();
 
     const incProduct = () => {
-        dispatch(buyNow({ id } as CartItemType));
+        dispatch(incItem(id));
     };
 
     const decProduct = () => {
@@ -83,5 +82,3 @@ const CartItem: React.FC<CartItemProps> = ({
         </div>
     );
 };
-
-export default CartItem;

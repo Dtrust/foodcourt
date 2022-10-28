@@ -19,7 +19,7 @@ import { StatusEnum } from '../../store/product/types';
 
 import './Menu.sass';
 
-const Menu = () => {
+export const Menu = () => {
     const dispatch = useAPPDispatch();
     // const navigate = useNavigate();
 
@@ -71,7 +71,7 @@ const Menu = () => {
     // }, []);
 
     React.useEffect(() => {
-        if (!isParams.current) {
+        if (!items.length) {
             dispatch(
                 fetchProducts({
                     category,
@@ -84,17 +84,7 @@ const Menu = () => {
         }
 
         isParams.current = false;
-    }, [
-        categoryID,
-        sortProperty,
-        productsLimit,
-        searchValue,
-        category,
-        dispatch,
-        order,
-        search,
-        sortBy,
-    ]);
+    }, []);
 
     // React.useEffect(() => {
     //     if (isMounted.current) {
@@ -174,5 +164,3 @@ const Menu = () => {
         </section>
     );
 };
-
-export default Menu;

@@ -13,7 +13,7 @@ type ProductOptionsProps = {
     setActiveType: any;
 };
 
-const ProductOptions: React.FC<ProductOptionsProps> = props => {
+export const ProductOptions: React.FC<ProductOptionsProps> = props => {
     const {
         types,
         sizes,
@@ -59,5 +59,3 @@ const ProductOptions: React.FC<ProductOptionsProps> = props => {
         </div>
     );
 };
-
-export default ProductOptions;

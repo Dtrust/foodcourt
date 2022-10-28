@@ -19,7 +19,7 @@ const menuItems = [
 
 const phoneNumber = '+38 (050) 111 22 33';
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
     const location = useLocation();
 
     const { items, totalPrice, totalCount } = useSelector(selectCart);
@@ -126,14 +126,16 @@ const Header: React.FC = () => {
                         <div className="header-cart">
                             <Link to="/cart" className="informer" title="cart">
                                 <div className="informer-wrap">
-                                    <p className="informer-total">
-                                        <span className="informer-total__price">
-                                            {totalPrice}
-                                        </span>
-                                        <span className="informer-total__mount">
-                                            $
-                                        </span>
-                                    </p>
+                                    {totalCount > 0 && (
+                                        <p className="informer-total">
+                                            <span className="informer-total__price">
+                                                {totalPrice}
+                                            </span>
+                                            <span className="informer-total__mount">
+                                                $
+                                            </span>
+                                        </p>
+                                    )}
                                 </div>
                                 <svg
                                     className={'informer-icon'}
@@ -187,5 +189,3 @@ const Header: React.FC = () => {
         </header>
     );
 };
-
-export default Header;

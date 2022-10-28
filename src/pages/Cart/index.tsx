@@ -1,15 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { CartItem, CartEmpty } from '../../components';
 import { selectCart } from '../../store/cart/selectors';
 import { clearCart } from '../../store/cart/slice';
+import { useAPPDispatch } from '../../store/store';
 
 import './Cart.sass';
 
 const Cart: React.FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAPPDispatch();
     const { items, totalPrice, totalCount } = useSelector(selectCart);
 
     const onClickClear = () => dispatch(clearCart());
@@ -69,7 +70,7 @@ const Cart: React.FC = () => {
                     <span>Empty cart</span>
                 </button>
                 <div className="cart-list">
-                    {items.map((item: any) => (
+                    {items.map(item => (
                         <CartItem key={item.id} {...item} />
                     ))}
                 </div>

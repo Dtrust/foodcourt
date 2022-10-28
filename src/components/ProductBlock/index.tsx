@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { v1 as uuidv1 } from 'uuid';
 
-import ProductOptions from './ProductOptions';
-import { BuyButton } from './../index';
+import { ProductOptions } from './ProductOptions';
+import { BuyButton } from '../index';
 
 import { selectCartItemByID } from '../../store/cart/selectors';
 import { CartItemType } from '../../store/cart/types';
@@ -21,7 +22,7 @@ type ProductBlockProps = {
     sizes: [];
 };
 
-const ProductBlock: React.FC<ProductBlockProps> = props => {
+export const ProductBlock: React.FC<ProductBlockProps> = props => {
     const dispatch = useDispatch();
     const { id, name, price, ing, imageUrl, types, sizes } = props;
 
@@ -30,10 +31,12 @@ const ProductBlock: React.FC<ProductBlockProps> = props => {
 
     const cartItem = useSelector(selectCartItemByID(id));
     const cartItemCount = cartItem ? cartItem.count : 0;
+    const cartItemID = cartItem ? cartItem.id : uuidv1();
 
     const addItemToCart = () => {
         const item: CartItemType = {
-            id,
+            id: cartItemID,
+            productID: id,
             name,
             price,
             ing,
@@ -78,5 +81,3 @@ const ProductBlock: React.FC<ProductBlockProps> = props => {
         </div>
     );
 };
-
-export default ProductBlock;

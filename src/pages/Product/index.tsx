@@ -1,9 +1,10 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { BuyButton, ProductOptions } from '../../components';
-
 import { useSelector } from 'react-redux';
+import { v1 as uuidv1 } from 'uuid';
+
+import { BuyButton, ProductOptions } from '../../components';
 
 import { useAPPDispatch } from '../../store/store';
 import { CartItemType } from '../../store/cart/types';
@@ -26,6 +27,7 @@ const Product: React.FC = () => {
     const { id } = useParams();
     const cartItem = useSelector(selectCartItemByID(String(id)));
     const cartItemCount = cartItem ? cartItem.count : 0;
+    const cartItemID = cartItem ? cartItem.id : uuidv1();
 
     React.useEffect(() => {
         window.scrollTo(0, 0);
@@ -47,7 +49,8 @@ const Product: React.FC = () => {
 
     const addItemToCart = () => {
         const item: CartItemType = {
-            id: product.id,
+            id: cartItemID,
+            productID: product.id,
             name: product.name,
             price: product.price,
             ing: product.ing,
