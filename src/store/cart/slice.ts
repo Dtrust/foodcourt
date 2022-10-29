@@ -17,40 +17,15 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         buyNow(state, action: PayloadAction<CartItemType>) {
-            const itemID = state.items.find(
-                obj => obj.id === action.payload.id
-            );
-            const itemOption = state.items.find(
-                obj => obj.type === action.payload.type
-            );
-            const itemSize = state.items.find(
-                obj => obj.size === action.payload.size
+            const isItemAdded = state.items.find(
+                obj =>
+                    obj.type === action.payload.type &&
+                    obj.size === action.payload.size &&
+                    obj.name === action.payload.name
             );
 
-            //ToDo need fix this process {
-            // 	Possible cartItemModel
-            // 	totalPrice: 0,
-            // 	totalCount: 0
-            // 	products: [
-            // 		{
-            // 			id: '',
-            // 			name: '',
-            // 			ing: '',
-            // 			imageUrl: '',
-            // 			items: [
-            // 				id: hash,
-            // 				type: ''
-            // 				size: ''
-            // 				price: ''
-            // 				count: ''
-            // 			]
-            // 		}
-            // 	]
-            //
-            // }
-
-            if (itemID) {
-                itemID.count++;
+            if (isItemAdded) {
+                isItemAdded.count++;
             } else {
                 state.items.push({
                     ...action.payload,

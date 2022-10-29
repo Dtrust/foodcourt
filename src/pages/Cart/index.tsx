@@ -24,7 +24,7 @@ const Cart: React.FC = () => {
     }
 
     return (
-        <div className="block-top cart">
+        <section className="block-top cart">
             <div className="container cart-content">
                 <div className="title cart-title">
                     <span className="title-decor cart-title__decor">Cart</span>
@@ -111,7 +111,7 @@ const Cart: React.FC = () => {
                     </button>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 

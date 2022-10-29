@@ -24,8 +24,8 @@ const Product: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useAPPDispatch();
 
-    const { id } = useParams();
-    const cartItem = useSelector(selectCartItemByID(String(id)));
+    const { productID } = useParams();
+    const cartItem = useSelector(selectCartItemByID(String(productID)));
     const cartItemCount = cartItem ? cartItem.count : 0;
     const cartItemID = cartItem ? cartItem.id : uuidv1();
 
@@ -33,7 +33,9 @@ const Product: React.FC = () => {
         window.scrollTo(0, 0);
         async function fetchProduct() {
             try {
-                const { data } = await axios.get(`${REACT_APP_DB}/${id}`);
+                const { data } = await axios.get(
+                    `${REACT_APP_DB}/${productID}`
+                );
                 setProduct(data);
             } catch (err) {
                 alert('no product');
@@ -41,7 +43,7 @@ const Product: React.FC = () => {
             }
         }
         fetchProduct();
-    }, [id, navigate]);
+    }, [productID, navigate]);
 
     if (!product) {
         return <>'Loading...'</>;

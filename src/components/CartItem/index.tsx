@@ -1,15 +1,15 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { ProductCount } from '../ProductBlock/ProductCount';
-
+import { useAPPDispatch } from '../../store/store';
 import { incItem, decItem, removeItem } from '../../store/cart/slice';
 
 import './CartItem.sass';
 
 type CartItemProps = {
     id: string;
+    productID: string;
     name: string;
     price: number;
     ing: string;
@@ -21,6 +21,7 @@ type CartItemProps = {
 
 export const CartItem: React.FC<CartItemProps> = ({
     id,
+    productID,
     name,
     price,
     ing,
@@ -29,7 +30,7 @@ export const CartItem: React.FC<CartItemProps> = ({
     type,
     size,
 }) => {
-    const dispatch = useDispatch();
+    const dispatch = useAPPDispatch();
 
     const incProduct = () => {
         dispatch(incItem(id));
@@ -49,20 +50,28 @@ export const CartItem: React.FC<CartItemProps> = ({
                 <img src={imageUrl} alt={name} />
             </div>
             <div className="cart-item__info">
-                <Link key={id} to={`/product/${id}`} title={name}>
-                    <h4 className="cart-item__title">{name}</h4>
-                </Link>
-                <p className="cart-item__desc">{ing}</p>
-                <div className="cart-item__options cart-options">
-                    <p className="cart-options__item cart-options--type">
-                        Dough:
-                        <span>{type}</span>
-                    </p>
-                    <p className="cart-options__item cart-options--size">
-                        Size:
-                        <span>{size}cm</span>
-                    </p>
+                <div className="cart-info">
+                    <div className="cart-info__wrap">
+                        <Link
+                            key={id}
+                            to={`/product/${productID}`}
+                            title={name}
+                        >
+                            <h4 className="cart-item__title">{name}</h4>
+                        </Link>
+                        <div className="cart-item__options cart-options">
+                            <p className="cart-options__item cart-options--type">
+                                Dough:
+                                <span>{type}</span>
+                            </p>
+                            <p className="cart-options__item cart-options--size">
+                                Size:
+                                <span>{size}cm</span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
+                <p className="cart-item__desc">{ing}</p>
             </div>
             <div className="cart-item__wrapper">
                 <ProductCount
