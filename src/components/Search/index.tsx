@@ -1,16 +1,15 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import debounce from 'lodash.debounce';
 import classNames from 'classnames';
 
 import { setSearchValue } from '../../store/filter/slice';
+import { useAPPDispatch } from '../../store/store';
 
 import './Search.sass';
-
 import icons from '../../assets/images/icons.svg';
 
 export const Search: React.FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAPPDispatch();
     const [localValue, setLocalValue] = React.useState('');
     const inputRef = React.useRef<HTMLInputElement>(null);
 

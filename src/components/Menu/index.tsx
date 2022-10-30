@@ -1,10 +1,10 @@
 import React from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-// import qs from 'qs';
+import qs from 'qs';
 
 import { Categories, ProductBlock, Sort, Skeleton, Search } from '../index';
-// import { sortOptions } from '../Sort';
+import { sortOptions } from '../Sort';
 
 import { useAPPDispatch } from '../../store/store';
 import { selectFilter } from '../../store/filter/selectors';
@@ -13,18 +13,19 @@ import {
     setCategoryID,
     updateProductsLimit,
     setProductsLimit,
+    setFilters,
 } from '../../store/filter/slice';
 import { fetchProducts } from '../../store/product/actions';
-import { StatusEnum } from '../../store/product/types';
+import { SearchProductParams, StatusEnum } from '../../store/product/types';
 
 import './Menu.sass';
 
 export const Menu = () => {
     const dispatch = useAPPDispatch();
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const isParams = React.useRef(false);
-    // const isMounted = React.useRef(false);
+    const isMounted = React.useRef(false);
 
     const { categoryID, sort, productsLimit, searchValue } =
         useSelector(selectFilter);
@@ -32,72 +33,73 @@ export const Menu = () => {
     const sortProperty = sort.sortProperty;
     const { items, status } = useSelector(selectProduct);
 
-    const onChangeCategory = React.useCallback(
-        (id: number) => {
-            dispatch(setCategoryID(id));
-        },
-        [dispatch]
-    );
+    const onChangeCategory = React.useCallback((id: number) => {
+        dispatch(setCategoryID(id));
+    }, []);
 
-    const category = categoryID > 0 ? `category=${categoryID}` : '';
-    const order = sortProperty.includes('-') ? 'asc' : 'desc';
-    const sortBy = sortProperty.replace('-', '');
-    const search = searchValue ? `search=${searchValue}` : '';
+    const getProducts = () => {
+        const category = categoryID > 0 ? `category=${categoryID}` : '';
+        const order = sortProperty.includes('-') ? 'asc' : 'desc';
+        const sortBy = sortProperty.replace('-', '');
+        const search = searchValue ? `${searchValue}` : '';
+
+        dispatch(
+            fetchProducts({
+                category,
+                order,
+                sortBy,
+                search,
+                productsLimit: Number(productsLimit),
+            })
+        );
+    };
 
     // If first render, then check url-params and save to redux
-    // React.useEffect(() => {
-    //     if (window.location.search) {
-    //         const params = qs.parse(
-    //             window.location.search.substring(1)
-    //         ) as unknown as SearchProductParams;
-    //
-    //         const sort = sortOptions.find(
-    //             obj => obj.sortProperty === params.sortBy
-    //         );
-    //
-    //         // if (sort) {
-    //         //     params.sortBy = sort
-    //         // }
-    //         dispatch(
-    //             setFilters({
-    //                 searchValue: params.search,
-    //                 categoryID: Number(params.category),
-    //                 productsLimit: Number(params.productsLimit),
-    //                 sort: sort || sortOptions[0],
-    //             })
-    //         );
-    //     }
-    //     isParams.current = true;
-    // }, []);
-
     React.useEffect(() => {
-        if (!items.length) {
+        if (window.location.search) {
+            const params = qs.parse(
+                window.location.search.substring(1)
+            ) as unknown as SearchProductParams;
+
+            const sort = sortOptions.find(
+                obj => obj.sortProperty === params.sortBy
+            );
+
+            console.log(params);
+
+            // if (sort) {
+            //     params.sortBy = sort;
+            // }
             dispatch(
-                fetchProducts({
-                    category,
-                    order,
-                    sortBy,
-                    search,
-                    productsLimit: Number(productsLimit),
+                setFilters({
+                    searchValue: params.search,
+                    //@ts-ignore
+                    categoryID: params.categoryID,
+                    productsLimit: Number(params.productsLimit),
+                    sort: sort || sortOptions[0],
                 })
             );
         }
-
         isParams.current = false;
     }, []);
 
-    // React.useEffect(() => {
-    //     if (isMounted.current) {
-    //         const queryString = qs.stringify({
-    //             sortProperty: sort.sortProperty,
-    //             categoryID,
-    //             productsLimit,
-    //         });
-    //
-    //         navigate(`?${queryString}`);
-    //     }
-    //     isMounted.current = true;
-    // }, [categoryID, sortProperty, productsLimit, searchValue]);
+    React.useEffect(() => {
+        getProducts();
+        isParams.current = true;
+    }, [categoryID, sort.sortProperty, searchValue, productsLimit]);
+
+    React.useEffect(() => {
+        if (isMounted.current) {
+            const queryString = qs.stringify({
+                sortProperty: sort.sortProperty,
+                categoryID,
+                productsLimit,
+            });
+
+            navigate(`?${queryString}`);
+        }
+        isMounted.current = true;
+    }, [categoryID, sortProperty, productsLimit, searchValue]);
 
     const loadMore = () => {
         dispatch(updateProductsLimit());

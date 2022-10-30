@@ -11,7 +11,7 @@ export const fetchProducts = createAsyncThunk(
         const { category, order, sortBy, search, productsLimit } = params;
 
         const { data } = await axios.get<ProductItemType[]>(
-            `${REACT_APP_DB}?p=1&l=${productsLimit}&${category}&sortBy=${sortBy}&order=${order}&${search}`
+            `${REACT_APP_DB}?p=1&l=${productsLimit}&${category}&sortBy=${sortBy}&order=${order}&search=${search}`
         );
         return data;
     }
