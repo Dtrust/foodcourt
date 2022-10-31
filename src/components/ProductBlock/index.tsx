@@ -6,7 +6,10 @@ import { v1 as uuidv1 } from 'uuid';
 import { ProductOptions } from './ProductOptions';
 import { BuyButton } from '../index';
 
-import { selectCartItemByID } from '../../store/cart/selectors';
+import {
+    selectCartItemByID,
+    selectCartProductGroup,
+} from '../../store/cart/selectors';
 import { CartItemType } from '../../store/cart/types';
 import { buyNow } from '../../store/cart/slice';
 
@@ -30,7 +33,10 @@ export const ProductBlock: React.FC<ProductBlockProps> = props => {
     const [activeSize, setActiveSize] = React.useState(0);
 
     const cartItem = useSelector(selectCartItemByID(id));
-    const cartItemCount = cartItem ? cartItem.count : 0;
+
+    const productGroup = useSelector(selectCartProductGroup(id));
+
+    const cartItemCount = productGroup ? productGroup.count : 0;
     const cartItemID = cartItem ? cartItem.id : uuidv1();
 
     const addItemToCart = () => {

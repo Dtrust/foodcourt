@@ -19,17 +19,9 @@ type CartItemProps = {
     size: number;
 };
 
-export const CartItem: React.FC<CartItemProps> = ({
-    id,
-    productID,
-    name,
-    price,
-    ing,
-    imageUrl,
-    count,
-    type,
-    size,
-}) => {
+export const CartItem: React.FC<CartItemProps> = props => {
+    const { id, productID, name, price, ing, imageUrl, count, type, size } =
+        props;
     const dispatch = useAPPDispatch();
 
     const incProduct = () => {
@@ -41,7 +33,7 @@ export const CartItem: React.FC<CartItemProps> = ({
     };
 
     const removeProduct = () => {
-        dispatch(removeItem(id));
+        dispatch(removeItem(props));
     };
 
     return (

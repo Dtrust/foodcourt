@@ -64,9 +64,6 @@ export const Menu = () => {
             const sort = sortOptions.find(
                 obj => obj.sortProperty === params.sortBy
             );
-
-            console.log(params);
-
             // if (sort) {
             //     params.sortBy = sort;
             // }

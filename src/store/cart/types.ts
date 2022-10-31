@@ -10,8 +10,14 @@ export type CartItemType = {
     count: number;
 };
 
+export type CartGroupType = {
+    id: string;
+    count: number;
+};
+
 export interface CartSliceState {
     totalPrice: number;
     totalCount: number;
     items: CartItemType[];
+    groups: CartGroupType[];
 }

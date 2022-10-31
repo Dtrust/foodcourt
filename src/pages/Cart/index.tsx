@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import { useSelector } from 'react-redux';
 
 import { CartItem, CartEmpty } from '../../components';
@@ -85,9 +85,11 @@ const Cart: React.FC = () => {
                     </p>
                 </div>
                 <div className="cart-actions">
-                    <Link
-                        to="/"
+                    <HashLink
+                        smooth
+                        to="/#menu"
                         className="btn btn-transparent cart-actions__btn btn--back"
+                        title="Back to Menu"
                     >
                         <svg
                             width="8"
@@ -105,7 +107,7 @@ const Cart: React.FC = () => {
                             />
                         </svg>
                         Back to menu
-                    </Link>
+                    </HashLink>
                     <button className="btn btn-solid cart-actions__btn btn--checkout">
                         Checkout
                     </button>

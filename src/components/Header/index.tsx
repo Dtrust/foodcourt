@@ -22,7 +22,7 @@ const phoneNumber = '+38 (050) 111 22 33';
 export const Header: React.FC = () => {
     const location = useLocation();
 
-    const { items, totalPrice, totalCount } = useSelector(selectCart);
+    const { items, totalPrice, totalCount, groups } = useSelector(selectCart);
 
     const [scroll, setScroll] = React.useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
@@ -38,7 +38,7 @@ export const Header: React.FC = () => {
 
     React.useEffect(() => {
         if (isMounted.current) {
-            const json = JSON.stringify(items);
+            const json = JSON.stringify({ items, groups });
             localStorage.setItem('foodCourt-cart', json);
         }
         isMounted.current = true;
