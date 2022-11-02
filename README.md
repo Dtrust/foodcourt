@@ -12,6 +12,6 @@ Vercel project-page [link](https://foodcourt-silk.vercel.app/).
 - React Hooks
 - Prettier
 - SCSS/SASS
-- React Content Loader
+- React Content Index
 - Lodash.Debounce
 - Code Splitting, React Loadable, useWhyDidYouUpdate

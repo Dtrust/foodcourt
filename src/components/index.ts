@@ -14,3 +14,4 @@ export * from './CartItem';
 export * from './CartEmpty';
 export * from './Location';
 export * from './Footer';
+export * from './Loader';

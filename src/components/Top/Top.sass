@@ -4,6 +4,7 @@
 
 .top
 	height: 80vh
+	overflow: hidden
 	&-offer
 		@include flexCenter
 		justify-content: space-around
@@ -12,6 +13,20 @@
 			&:nth-of-type(1)
 				position: relative
 				z-index: 1
+			&:nth-of-type(2)
+				position: relative
+				&::before
+					content: ''
+					position: absolute
+					top: 0
+					right: toRem(-50)
+					display: block
+					width: toRem(400)
+					height: toRem(400)
+					background-image: url('../../assets/images/decor-crumbs.png')
+					background-repeat: no-repeat
+					transform: scale(1.4)
+					filter: blur(1px)
 		&__title
 			position: relative
 			@include adaptiveFont(66, 32)
@@ -33,6 +48,7 @@
 				&-item
 					&__text
 						font-size: toRem(20)
+						font-weight: 600
 						text-align: left
 						color: #66a117
 
@@ -47,6 +63,8 @@
 				&:nth-of-type(2)
 					position: absolute
 					top: toRem(95)
+					&::before
+						content: none
 					&::after
 						content: ''
 						position: absolute

@@ -23,6 +23,20 @@
 		transform: rotate(180deg)
 	&::after
 		bottom: -10px
+	&-content
+		position: relative
+		&::before
+			content: ''
+			position: absolute
+			top: toRem(-50)
+			left: toRem(50)
+			display: block
+			width: toRem(90)
+			height: toRem(90)
+			background-image: url("../../assets/images/decor-tomato.png")
+			background-repeat: no-repeat
+			background-size: cover
+			filter: blur(3px)
 	&-categories
 		position: relative
 		max-width: toRem(1140)
