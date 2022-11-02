@@ -1,7 +1,6 @@
 {
   "name": "foodcourt",
   "version": "0.1.0",
-  "homepage": "https://dtrust.github.io/foodcourt/",
   "private": true,
   "dependencies": {
     "@loadable/component": "^5.15.2",
