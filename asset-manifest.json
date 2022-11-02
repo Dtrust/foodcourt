@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.css": "/foodcourt/static/css/main.84aee261.css",
-    "main.js": "/foodcourt/static/js/main.8eb50a5f.js",
+    "main.css": "/foodcourt/static/css/main.420cfc6e.css",
+    "main.js": "/foodcourt/static/js/main.a074c4ba.js",
     "Cart.css": "/foodcourt/static/css/Cart.60cf80a6.chunk.css",
-    "Cart.js": "/foodcourt/static/js/Cart.f1388851.chunk.js",
+    "Cart.js": "/foodcourt/static/js/Cart.d7f2076a.chunk.js",
     "Product.css": "/foodcourt/static/css/Product.95ee5a50.chunk.css",
-    "Product.js": "/foodcourt/static/js/Product.ab1c72a6.chunk.js",
+    "Product.js": "/foodcourt/static/js/Product.7135ff43.chunk.js",
     "NotFound.css": "/foodcourt/static/css/NotFound.fae0b000.chunk.css",
     "NotFound.js": "/foodcourt/static/js/NotFound.dd17f6f7.chunk.js",
     "static/media/bg.jpg": "/foodcourt/static/media/bg.32ab415bd50de3d972bd.jpg",
@@ -23,17 +23,17 @@
     "static/media/logo.svg": "/foodcourt/static/media/logo.ca73addd4289c6e9bfecf4db38dcbc50.svg",
     "static/media/icons.svg": "/foodcourt/static/media/icons.0b041bf9612c272464db8b80d67c1c4d.svg",
     "index.html": "/foodcourt/index.html",
-    "main.84aee261.css.map": "/foodcourt/static/css/main.84aee261.css.map",
-    "main.8eb50a5f.js.map": "/foodcourt/static/js/main.8eb50a5f.js.map",
+    "main.420cfc6e.css.map": "/foodcourt/static/css/main.420cfc6e.css.map",
+    "main.a074c4ba.js.map": "/foodcourt/static/js/main.a074c4ba.js.map",
     "Cart.60cf80a6.chunk.css.map": "/foodcourt/static/css/Cart.60cf80a6.chunk.css.map",
-    "Cart.f1388851.chunk.js.map": "/foodcourt/static/js/Cart.f1388851.chunk.js.map",
+    "Cart.d7f2076a.chunk.js.map": "/foodcourt/static/js/Cart.d7f2076a.chunk.js.map",
     "Product.95ee5a50.chunk.css.map": "/foodcourt/static/css/Product.95ee5a50.chunk.css.map",
-    "Product.ab1c72a6.chunk.js.map": "/foodcourt/static/js/Product.ab1c72a6.chunk.js.map",
+    "Product.7135ff43.chunk.js.map": "/foodcourt/static/js/Product.7135ff43.chunk.js.map",
     "NotFound.fae0b000.chunk.css.map": "/foodcourt/static/css/NotFound.fae0b000.chunk.css.map",
     "NotFound.dd17f6f7.chunk.js.map": "/foodcourt/static/js/NotFound.dd17f6f7.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.84aee261.css",
-    "static/js/main.8eb50a5f.js"
+    "static/css/main.420cfc6e.css",
+    "static/js/main.a074c4ba.js"
   ]
 }
