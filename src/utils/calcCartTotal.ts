@@ -1,7 +1,6 @@
 import { CartItemType } from '../store/cart/types';
 
 export const calcCartTotalPrice = (items: CartItemType[]) => {
-    console.log(items);
     return items.reduce((sum, obj) => obj.price * obj.count + sum, 0);
 };
 

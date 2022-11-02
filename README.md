@@ -1,6 +1,6 @@
 # Takeaway food ordering app
 
-GitHub-Pages project [link](https://dtrust.github.io/foodcourt/).
+Vercel project-page [link](https://foodcourt-silk.vercel.app/).
 
 ## Technology Stack
 
